@@ -16,7 +16,7 @@ export class Roleservice {
   }
 
   insert(role: Role) {
-    return this.http.post(this.url, role);
+    return this.http.post(this.url, role, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Roleservice {
   }
 
   update(id: number, role: Role) {
-    return this.http.put(`${this.url}/${id}`, role);
+    return this.http.put(`${this.url}/${id}`, role, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }

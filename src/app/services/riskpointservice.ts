@@ -16,7 +16,7 @@ export class Riskpointservice {
   }
 
   insert(riskPoint: RiskPoint) {
-    return this.http.post(this.url, riskPoint);
+    return this.http.post(this.url, riskPoint, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -27,10 +27,10 @@ export class Riskpointservice {
     return this.http.put(`${this.url}/actualizar/${id}`, {
       ...riskPoint,
       idModel3D: { idModels3D: riskPoint.idModel3D },
-    });
+    }, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/eliminar/${id}`);
+    return this.http.delete(`${this.url}/eliminar/${id}`, { responseType: 'text' });
   }
 }

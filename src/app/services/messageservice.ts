@@ -16,7 +16,7 @@ export class Messageservice {
   }
 
   insert(message: Message) {
-    return this.http.post(`${this.url}/registrar`, message);
+    return this.http.post(`${this.url}/registrar`, message, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Messageservice {
   }
 
   update(id: number, message: Message) {
-    return this.http.put(`${this.url}/actualizar/${id}`, message);
+    return this.http.put(`${this.url}/actualizar/${id}`, message, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }

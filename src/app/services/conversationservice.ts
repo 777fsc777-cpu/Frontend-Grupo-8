@@ -16,7 +16,7 @@ export class Conversationservice {
   }
 
   insert(conversation: Conversation) {
-    return this.http.post(this.url, conversation);
+    return this.http.post(this.url, conversation, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Conversationservice {
   }
 
   update(conversation: Conversation) {
-    return this.http.put(`${this.url}/actualizar`, conversation);
+    return this.http.put(`${this.url}/actualizar`, conversation, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }

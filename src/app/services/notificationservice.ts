@@ -16,7 +16,7 @@ export class Notificationservice {
   }
 
   insert(notification: NotificationModel) {
-    return this.http.post(`${this.url}/Registrar`, this.armarEnvio(notification));
+    return this.http.post(`${this.url}/Registrar`, this.armarEnvio(notification), { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -27,11 +27,11 @@ export class Notificationservice {
     return this.http.put(`${this.url}/actualizar`, {
       ...this.armarEnvio(notification),
       idNotification: notification.idNotification,
-    });
+    }, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 
   private armarEnvio(notification: NotificationModel) {

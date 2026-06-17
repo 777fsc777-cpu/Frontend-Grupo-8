@@ -16,7 +16,7 @@ export class Model3dservice {
   }
 
   insert(model3d: Model3d) {
-    return this.http.post(`${this.url}/Register`, model3d);
+    return this.http.post(`${this.url}/Register`, model3d, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Model3dservice {
   }
 
   update(model3d: Model3d) {
-    return this.http.put(`${this.url}/Update`, model3d);
+    return this.http.put(`${this.url}/Update`, model3d, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }
