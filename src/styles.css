@@ -1,4 +1,155 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --sr-bg: #eef7ff;
+  --sr-surface: #ffffff;
+  --sr-surface-soft: #f7fbff;
+  --sr-primary: #2f7dd3;
+  --sr-primary-dark: #195da5;
+  --sr-accent: #10a6a6;
+  --sr-warning: #f2bf4b;
+  --sr-text: #19324d;
+  --sr-muted: #64758a;
+  --sr-border: #d7e8f8;
+  --sr-shadow: 0 18px 45px rgba(43, 109, 177, 0.13);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--sr-text);
+  background:
+    linear-gradient(180deg, #e7f4ff 0%, var(--sr-bg) 42%, #f9fcff 100%);
+}
+
+h1 {
+  width: min(1180px, calc(100% - 36px));
+  margin: 34px auto 18px;
+  color: var(--sr-primary-dark);
+  font-size: clamp(1.55rem, 2vw, 2.2rem);
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 74px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--sr-primary), var(--sr-accent), var(--sr-warning));
+}
+
+form {
+  width: min(980px, calc(100% - 36px));
+  margin: 0 auto 42px;
+  padding: 28px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 16px 18px;
+  background: rgba(255, 255, 255, 0.94);
+  border: 1px solid var(--sr-border);
+  border-radius: 8px;
+  box-shadow: var(--sr-shadow);
+}
+
+form mat-form-field {
+  width: 100%;
+}
+
+form textarea {
+  min-height: 86px;
+  resize: vertical;
+}
+
+form button {
+  align-self: center;
+}
+
+form button[type="submit"] {
+  min-height: 44px;
+  background-color: var(--sr-primary) !important;
+  color: white !important;
+}
+
+form button[type="button"] {
+  min-height: 44px;
+  color: var(--sr-primary-dark) !important;
+}
+
+h1 + button {
+  margin-left: max(18px, calc((100% - min(1180px, calc(100% - 36px))) / 2));
+  margin-bottom: 18px;
+  min-height: 42px;
+  background-color: var(--sr-primary) !important;
+  color: white !important;
+  box-shadow: 0 10px 22px rgba(47, 125, 211, 0.22);
+}
+
+table {
+  width: min(1180px, calc(100% - 36px));
+  margin: 0 auto 48px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--sr-border);
+  background: var(--sr-surface);
+  box-shadow: var(--sr-shadow);
+}
+
+.mat-mdc-header-row {
+  background: #dff0ff !important;
+}
+
+.mat-mdc-header-cell {
+  color: var(--sr-primary-dark);
+  font-weight: 700;
+}
+
+.mat-mdc-row:nth-child(even) {
+  background: var(--sr-surface-soft);
+}
+
+.mat-mdc-row:hover {
+  background: #edf8ff;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 14px 16px !important;
+}
+
+.mat-mdc-icon-button[color="primary"] {
+  color: var(--sr-primary) !important;
+}
+
+.mat-mdc-icon-button[color="warn"] {
+  color: #d94b63 !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #163d65;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #bff7f3;
+}
+
+@media (max-width: 760px) {
+  form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  h1 + button {
+    margin-left: 18px;
+  }
+}
