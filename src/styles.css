@@ -1,4 +1,167 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --sr-bg: #f3f9ff;
+  --sr-card: #ffffff;
+  --sr-soft: #edf6ff;
+  --sr-primary: #2d7fd3;
+  --sr-primary-dark: #164f8f;
+  --sr-accent: #16a3b8;
+  --sr-text: #18324a;
+  --sr-muted: #6a7b8d;
+  --sr-border: #d6e7f6;
+  --sr-shadow: 0 14px 34px rgba(45, 127, 211, 0.12);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: var(--sr-text);
+  background: var(--sr-bg);
+}
+
+h1 {
+  width: min(1100px, calc(100% - 40px));
+  margin: 32px auto 18px;
+  color: var(--sr-primary-dark);
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+h1::after {
+  content: "";
+  display: block;
+  width: 64px;
+  height: 3px;
+  margin-top: 9px;
+  border-radius: 999px;
+  background: var(--sr-accent);
+}
+
+form {
+  width: min(820px, calc(100% - 40px));
+  margin: 0 auto 42px;
+  padding: 26px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+  background: var(--sr-card);
+  border: 1px solid var(--sr-border);
+  border-radius: 8px;
+  box-shadow: var(--sr-shadow);
+}
+
+form mat-form-field {
+  width: 100%;
+}
+
+form mat-form-field:has(textarea) {
+  grid-column: 1 / -1;
+}
+
+form textarea {
+  min-height: 92px;
+  resize: vertical;
+}
+
+form > button[type="submit"] {
+  order: 2;
+  grid-column: 2;
+  justify-self: end;
+  min-width: 160px;
+  min-height: 44px;
+  background: var(--sr-primary) !important;
+  color: #ffffff !important;
+}
+
+form > button[type="button"] {
+  order: 1;
+  grid-column: 1;
+  justify-self: start;
+  min-width: 130px;
+  min-height: 44px;
+  color: var(--sr-primary-dark) !important;
+}
+
+h1 + button {
+  margin-left: max(20px, calc((100% - min(1100px, calc(100% - 40px))) / 2));
+  margin-bottom: 18px;
+  min-height: 42px;
+  background: var(--sr-primary) !important;
+  color: #ffffff !important;
+}
+
+table {
+  width: min(1100px, calc(100% - 40px));
+  margin: 0 auto 46px;
+  border: 1px solid var(--sr-border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--sr-card);
+  box-shadow: var(--sr-shadow);
+}
+
+.mat-mdc-header-row {
+  background: var(--sr-soft) !important;
+}
+
+.mat-mdc-header-cell {
+  color: var(--sr-primary-dark);
+  font-weight: 700;
+}
+
+.mat-mdc-row:hover {
+  background: #f8fcff;
+}
+
+.mat-mdc-cell,
+.mat-mdc-header-cell {
+  padding: 13px 15px !important;
+}
+
+.mat-mdc-icon-button[color="primary"] {
+  color: var(--sr-primary) !important;
+}
+
+.mat-mdc-icon-button[color="warn"] {
+  color: #d94b63 !important;
+}
+
+.mat-mdc-snack-bar-container {
+  --mdc-snackbar-container-color: #164f8f;
+  --mdc-snackbar-supporting-text-color: #ffffff;
+  --mat-snack-bar-button-color: #c8f7ff;
+}
+
+@media (max-width: 760px) {
+  h1 {
+    font-size: 1.55rem;
+  }
+
+  form {
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+
+  form mat-form-field:has(textarea),
+  form > button[type="submit"],
+  form > button[type="button"] {
+    grid-column: 1;
+    justify-self: stretch;
+  }
+
+  table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  h1 + button {
+    margin-left: 20px;
+  }
+}

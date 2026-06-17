@@ -1,19 +1,36 @@
-import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Estate } from "../models/Estate";
-import { environment } from "../../environments/environment";
-const base_url = environment.base
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '../../environments/environment';
+import { Estate } from '../models/Estate';
+
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
+export class Estateservice {
+  private url = `${environment.base}/Estate`;
 
-export class estateServices{
-    private url = `http://localhost:8080/Estate`
+  constructor(private http: HttpClient) {}
 
-    constructor(private http: HttpClient){}
+  list() {
+    return this.http.get<Estate[]>(`${this.url}/listAll`);
+  }
 
-    list(): Observable<Estate[]>{
-        return this.http.get<Estate[]>(`${this.url}/listAll`)
-    }
+  insert(estate: Estate) {
+    return this.http.post(this.url, estate);
+  }
+
+  listId(id: number) {
+    return this.http.get<Estate>(`${this.url}/listId/${id}`);
+  }
+
+  update(estate: Estate) {
+    return this.http.put(`${this.url}/actualizar`, {
+      ...estate,
+      users: { idUser: estate.idUser },
+    });
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`);
+  }
 }

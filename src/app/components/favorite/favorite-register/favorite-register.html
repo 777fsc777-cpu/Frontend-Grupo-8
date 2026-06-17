@@ -1,0 +1,25 @@
+<h1>Registrar favorito</h1>
+
+<form #favoriteForm="ngForm" (ngSubmit)="aceptar()">
+  <mat-form-field appearance="outline">
+    <mat-label>Fecha de creación</mat-label>
+    <input matInput type="date" name="creationDate" [(ngModel)]="favorite.creationDate" required />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>ID usuario</mat-label>
+    <input matInput type="number" name="idUser" [(ngModel)]="favorite.idUser" required min="1" />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>ID inmueble</mat-label>
+    <input matInput type="number" name="idEstate" [(ngModel)]="favorite.idEstate" required min="1" />
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" [disabled]="favoriteForm.invalid">
+    <mat-icon>save</mat-icon>
+    Guardar
+  </button>
+
+  <button mat-button type="button" (click)="cancelar()">Cancelar</button>
+</form>

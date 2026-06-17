@@ -1,10 +1,44 @@
 mat-toolbar {
-  gap: 10px;
+  gap: 12px;
+  min-height: 66px;
+  padding: 0 28px;
+  background: #2d7fd3 !important;
+  color: #ffffff !important;
+  box-shadow: 0 10px 24px rgba(45, 127, 211, 0.18);
+}
+
+mat-toolbar mat-icon {
+  color: #dff3ff;
+}
+
+mat-toolbar span {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0;
 }
 
 .menu-clases {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  padding: 16px;
+  width: min(980px, calc(100% - 40px));
+  margin: 36px auto;
+  padding: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 14px;
+  background: #ffffff;
+  border: 1px solid #d6e7f6;
+  border-radius: 8px;
+  box-shadow: 0 14px 34px rgba(45, 127, 211, 0.12);
+}
+
+.menu-clases button {
+  min-height: 48px;
+  justify-content: flex-start;
+  border-color: #bddbf3 !important;
+  color: #164f8f !important;
+  background: #f7fbff !important;
+}
+
+.menu-clases button:hover {
+  border-color: #2d7fd3 !important;
+  background: #edf6ff !important;
 }
