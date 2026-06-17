@@ -1,19 +1,14 @@
 mat-toolbar {
   gap: 12px;
-  min-height: 68px;
+  min-height: 66px;
   padding: 0 28px;
-  background: linear-gradient(90deg, #1f6fbd, #2f8fda) !important;
+  background: #2d7fd3 !important;
   color: #ffffff !important;
-  box-shadow: 0 12px 26px rgba(31, 111, 189, 0.24);
+  box-shadow: 0 10px 24px rgba(45, 127, 211, 0.18);
 }
 
 mat-toolbar mat-icon {
-  width: 38px;
-  height: 38px;
-  display: grid;
-  place-items: center;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.18);
+  color: #dff3ff;
 }
 
 mat-toolbar span {
@@ -23,29 +18,27 @@ mat-toolbar span {
 }
 
 .menu-clases {
-  width: min(1180px, calc(100% - 36px));
-  margin: 34px auto;
-  padding: 26px;
+  width: min(980px, calc(100% - 40px));
+  margin: 36px auto;
+  padding: 24px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
   gap: 14px;
-  border: 1px solid #d7e8f8;
+  background: #ffffff;
+  border: 1px solid #d6e7f6;
   border-radius: 8px;
-  background: rgba(255, 255, 255, 0.94);
-  box-shadow: 0 18px 45px rgba(43, 109, 177, 0.13);
+  box-shadow: 0 14px 34px rgba(45, 127, 211, 0.12);
 }
 
 .menu-clases button {
   min-height: 48px;
   justify-content: flex-start;
-  border-color: #badbf7 !important;
-  color: #195da5 !important;
+  border-color: #bddbf3 !important;
+  color: #164f8f !important;
   background: #f7fbff !important;
 }
 
 .menu-clases button:hover {
-  border-color: #2f7dd3 !important;
-  background: #eaf6ff !important;
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(47, 125, 211, 0.14);
+  border-color: #2d7fd3 !important;
+  background: #edf6ff !important;
 }
