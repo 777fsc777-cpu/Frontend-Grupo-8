@@ -1,20 +1,49 @@
-<mat-toolbar color="primary">
-  <mat-icon>home_work</mat-icon>
-  <span>SmartRent</span>
-</mat-toolbar>
+<section class="menu-home">
+  <div class="home-hero">
+    <div>
+      <p class="eyebrow">Panel principal</p>
+      <h1>SmartRent</h1>
+      <p class="hero-copy">Gestion centralizada de inmuebles, usuarios, contratos y actividad del sistema.</p>
+    </div>
+    <div class="hero-actions">
+      <button mat-flat-button color="primary" routerLink="/estates/list">
+        <mat-icon>apartment</mat-icon>
+        Inmuebles
+      </button>
+      <button mat-stroked-button routerLink="/users/list">
+        <mat-icon>group</mat-icon>
+        Usuarios
+      </button>
+    </div>
+  </div>
 
-<nav class="menu-clases">
-  <button mat-stroked-button routerLink="/users/list">Usuarios</button>
-  <button mat-stroked-button routerLink="/roles/list">Roles</button>
-  <button mat-stroked-button routerLink="/backgrounds/list">Antecedentes</button>
-  <button mat-stroked-button routerLink="/estates/list">Inmuebles</button>
-  <button mat-stroked-button routerLink="/favorites/list">Favoritos</button>
-  <button mat-stroked-button routerLink="/contracts/list">Contratos</button>
-  <button mat-stroked-button routerLink="/conversations/list">Conversaciones</button>
-  <button mat-stroked-button routerLink="/messages/list">Mensajes</button>
-  <button mat-stroked-button routerLink="/notifications/list">Notificaciones</button>
-  <button mat-stroked-button routerLink="/reviews/list">Reseñas</button>
-  <button mat-stroked-button routerLink="/risk-reports/list">Reportes de riesgo</button>
-  <button mat-stroked-button routerLink="/risk-points/list">Puntos de riesgo</button>
-  <button mat-stroked-button routerLink="/models3d/list">Modelos 3D</button>
-</nav>
+  <div class="summary-grid">
+    <mat-card class="summary-card" routerLink="/favorites/list">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>favorite</mat-icon>
+        <mat-card-title>Favoritos</mat-card-title>
+        <mat-card-subtitle>Cards solicitadas</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="summary-card" routerLink="/contracts/list">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>description</mat-icon>
+        <mat-card-title>Contratos</mat-card-title>
+        <mat-card-subtitle>Fechas y estados</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+
+    <mat-card class="summary-card" routerLink="/risk-reports/list">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>report</mat-icon>
+        <mat-card-title>Riesgos</mat-card-title>
+        <mat-card-subtitle>Reportes y puntos</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+
+  <div class="media-placeholder">
+    <span>PARA IMAGENES MAS ADELANTE</span>
+  </div>
+</section>

@@ -1,84 +1,50 @@
-<h1>Lista de usuarios</h1>
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Usuarios</p>
+      <h1>Lista de usuarios</h1>
+    </div>
+    <button mat-flat-button color="primary" routerLink="/users/register">
+      <mat-icon>add</mat-icon>
+      Registrar usuario
+    </button>
+  </header>
 
-<button mat-raised-button color="primary" routerLink="/users/register">
-  <mat-icon>add</mat-icon>
-  Registrar usuario
-</button>
+  <div class="entity-grid">
+    @for (element of dataSource.connect() | async; track element.idUser) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>person</mat-icon>
+          <mat-card-title>{{ element.name }} {{ element.lastName }}</mat-card-title>
+          <mat-card-subtitle>{{ element.username }} · ID {{ element.idUser }}</mat-card-subtitle>
+        </mat-card-header>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="c0">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.idUser }}</td>
-  </ng-container>
+        <mat-card-content>
+          <dl>
+            <div><dt>DNI</dt><dd>{{ element.dni }}</dd></div>
+            <div><dt>Telefono</dt><dd>{{ element.phoneNumber }}</dd></div>
+            <div><dt>Rol</dt><dd>{{ element.role }}</dd></div>
+            <div><dt>Creado</dt><dd>{{ element.createdDate | date:'dd/MM/yyyy' }}</dd></div>
+            <div><dt>Habilitado</dt><dd>{{ element.enabled }}</dd></div>
+          </dl>
+        </mat-card-content>
 
-  <ng-container matColumnDef="c1">
-    <th mat-header-cell *matHeaderCellDef>Nombre</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
+        <mat-card-actions align="end">
+          <button mat-icon-button color="primary" [routerLink]="['/users/edit', element.idUser]" aria-label="Editar usuario">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(element.idUser)" aria-label="Eliminar usuario">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay usuarios registrados.</span>
+      </mat-card>
+    }
+  </div>
 
-  <ng-container matColumnDef="c2">
-    <th mat-header-cell *matHeaderCellDef>Apellido</th>
-    <td mat-cell *matCellDef="let element">{{ element.lastName }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c3">
-    <th mat-header-cell *matHeaderCellDef>DNI</th>
-    <td mat-cell *matCellDef="let element">{{ element.dni }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c4">
-    <th mat-header-cell *matHeaderCellDef>Usuario</th>
-    <td mat-cell *matCellDef="let element">{{ element.username }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c5">
-    <th mat-header-cell *matHeaderCellDef>Verificado</th>
-    <td mat-cell *matCellDef="let element">{{ element.statusVerification }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c6">
-    <th mat-header-cell *matHeaderCellDef>Teléfono</th>
-    <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c7">
-    <th mat-header-cell *matHeaderCellDef>Creado</th>
-    <td mat-cell *matCellDef="let element">{{ element.createdDate | date:'dd/MM/yyyy' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c8">
-    <th mat-header-cell *matHeaderCellDef>Actualizado</th>
-    <td mat-cell *matCellDef="let element">{{ element.updateDate | date:'dd/MM/yyyy' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c9">
-    <th mat-header-cell *matHeaderCellDef>Habilitado</th>
-    <td mat-cell *matCellDef="let element">{{ element.enabled }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c10">
-    <th mat-header-cell *matHeaderCellDef>Rol</th>
-    <td mat-cell *matCellDef="let element">{{ element.role }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c11">
-    <th mat-header-cell *matHeaderCellDef>Editar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="['/users/edit', element.idUser]">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="c12">
-    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="warn" (click)="eliminar(element.idUser)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de usuarios"></mat-paginator>
+</section>

@@ -1,59 +1,49 @@
-<h1>Lista de puntos de riesgo</h1>
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Puntos de riesgo</p>
+      <h1>Lista de puntos de riesgo</h1>
+    </div>
+    <button mat-flat-button color="primary" routerLink="/risk-points/register">
+      <mat-icon>add</mat-icon>
+      Registrar punto
+    </button>
+  </header>
 
-<button mat-raised-button color="primary" routerLink="/risk-points/register">
-  <mat-icon>add</mat-icon>
-  Registrar punto
-</button>
+  <div class="entity-grid">
+    @for (element of dataSource.connect() | async; track element.id) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>location_on</mat-icon>
+          <mat-card-title>Punto #{{ element.id }}</mat-card-title>
+          <mat-card-subtitle>Severidad {{ element.severity }}</mat-card-subtitle>
+        </mat-card-header>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="c1">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.id }}</td>
-  </ng-container>
+        <mat-card-content>
+          <p class="card-note">{{ element.description }}</p>
+          <dl>
+            <div><dt>X</dt><dd>{{ element.cordX }}</dd></div>
+            <div><dt>Y</dt><dd>{{ element.cordY }}</dd></div>
+            <div><dt>Z</dt><dd>{{ element.cordZ }}</dd></div>
+          </dl>
+        </mat-card-content>
 
-  <ng-container matColumnDef="c2">
-    <th mat-header-cell *matHeaderCellDef>Descripción</th>
-    <td mat-cell *matCellDef="let element">{{ element.description }}</td>
-  </ng-container>
+        <mat-card-actions align="end">
+          <button mat-icon-button color="primary" [routerLink]="['/risk-points/edit', element.id]" aria-label="Editar punto">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(element.id)" aria-label="Eliminar punto">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay puntos registrados.</span>
+      </mat-card>
+    }
+  </div>
 
-  <ng-container matColumnDef="c3">
-    <th mat-header-cell *matHeaderCellDef>X</th>
-    <td mat-cell *matCellDef="let element">{{ element.cordX }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c4">
-    <th mat-header-cell *matHeaderCellDef>Y</th>
-    <td mat-cell *matCellDef="let element">{{ element.cordY }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c5">
-    <th mat-header-cell *matHeaderCellDef>Z</th>
-    <td mat-cell *matCellDef="let element">{{ element.cordZ }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c6">
-    <th mat-header-cell *matHeaderCellDef>Severidad</th>
-    <td mat-cell *matCellDef="let element">{{ element.severity }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c7">
-    <th mat-header-cell *matHeaderCellDef>Editar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="['/risk-points/edit', element.id]">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="c8">
-    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="warn" (click)="eliminar(element.id)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de puntos"></mat-paginator>
+</section>

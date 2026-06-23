@@ -1,59 +1,49 @@
-<h1>Lista de mensajes</h1>
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Mensajes</p>
+      <h1>Lista de mensajes</h1>
+    </div>
+    <button mat-flat-button color="primary" routerLink="/messages/register">
+      <mat-icon>add</mat-icon>
+      Registrar mensaje
+    </button>
+  </header>
 
-<button mat-raised-button color="primary" routerLink="/messages/register">
-  <mat-icon>add</mat-icon>
-  Registrar mensaje
-</button>
+  <div class="entity-grid">
+    @for (element of dataSource.connect() | async; track element.idMessage) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>mail</mat-icon>
+          <mat-card-title>Mensaje #{{ element.idMessage }}</mat-card-title>
+          <mat-card-subtitle>{{ element.dateSent | date:'dd/MM/yyyy' }}</mat-card-subtitle>
+        </mat-card-header>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="c1">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.idMessage }}</td>
-  </ng-container>
+        <mat-card-content>
+          <p class="card-note">{{ element.content }}</p>
+          <dl>
+            <div><dt>Estado</dt><dd>{{ element.status }}</dd></div>
+            <div><dt>ID conversacion</dt><dd>{{ element.conversation?.idConversation }}</dd></div>
+            <div><dt>ID usuario</dt><dd>{{ element.user?.idUser }}</dd></div>
+          </dl>
+        </mat-card-content>
 
-  <ng-container matColumnDef="c2">
-    <th mat-header-cell *matHeaderCellDef>Contenido</th>
-    <td mat-cell *matCellDef="let element">{{ element.content }}</td>
-  </ng-container>
+        <mat-card-actions align="end">
+          <button mat-icon-button color="primary" [routerLink]="['/messages/edit', element.idMessage]" aria-label="Editar mensaje">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(element.idMessage)" aria-label="Eliminar mensaje">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay mensajes registrados.</span>
+      </mat-card>
+    }
+  </div>
 
-  <ng-container matColumnDef="c3">
-    <th mat-header-cell *matHeaderCellDef>Estado</th>
-    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c4">
-    <th mat-header-cell *matHeaderCellDef>Fecha</th>
-    <td mat-cell *matCellDef="let element">{{ element.dateSent | date:'dd/MM/yyyy' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c5">
-    <th mat-header-cell *matHeaderCellDef>ID conversación</th>
-    <td mat-cell *matCellDef="let element">{{ element.conversation?.idConversation }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c6">
-    <th mat-header-cell *matHeaderCellDef>ID usuario</th>
-    <td mat-cell *matCellDef="let element">{{ element.user?.idUser }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c7">
-    <th mat-header-cell *matHeaderCellDef>Editar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="['/messages/edit', element.idMessage]">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="c8">
-    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="warn" (click)="eliminar(element.idMessage)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de mensajes"></mat-paginator>
+</section>
