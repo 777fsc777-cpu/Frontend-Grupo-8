@@ -12,6 +12,6 @@ export class Estate {
   bathrooms: number = 0;
   areaM2: number = 0;
   creationDate: string = '';
-  idUser: number = 0;
+  idUser: any = 0;
   user?: { idUser: number };
 }
