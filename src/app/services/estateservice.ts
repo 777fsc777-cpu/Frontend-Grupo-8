@@ -16,7 +16,7 @@ export class Estateservice {
   }
 
   insert(estate: Estate) {
-    return this.http.post(this.url, estate);
+    return this.http.post(this.url, estate, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -27,10 +27,10 @@ export class Estateservice {
     return this.http.put(`${this.url}/actualizar`, {
       ...estate,
       users: { idUser: estate.idUser },
-    });
+    }, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }

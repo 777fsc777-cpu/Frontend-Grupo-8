@@ -16,7 +16,7 @@ export class Reviewservice {
   }
 
   insert(review: Review) {
-    return this.http.post(this.url, review);
+    return this.http.post(this.url, review, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Reviewservice {
   }
 
   update(id: number, review: Review) {
-    return this.http.put(`${this.url}/actualizar/${id}`, review);
+    return this.http.put(`${this.url}/actualizar/${id}`, review,{ responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' });
   }
 }
