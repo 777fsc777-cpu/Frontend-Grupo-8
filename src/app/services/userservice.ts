@@ -30,4 +30,5 @@ export class Userservice {
   delete(id: number) {
     return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+
 }

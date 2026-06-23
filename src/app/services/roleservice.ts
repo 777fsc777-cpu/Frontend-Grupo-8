@@ -16,7 +16,7 @@ export class Roleservice {
   }
 
   insert(role: Role) {
-    return this.http.post(this.url, role, { responseType: 'text' });
+    return this.http.post(this.url, role,{ responseType: 'text' });
   }
 
   listId(id: number) {

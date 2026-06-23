@@ -16,7 +16,7 @@ export class Notificationservice {
   }
 
   insert(notification: NotificationModel) {
-    return this.http.post(`${this.url}/Registrar`, this.armarEnvio(notification), { responseType: 'text' });
+    return this.http.post(`${this.url}/Registrar`, this.armarEnvio(notification),{ responseType: 'text' });
   }
 
   listId(id: number) {
@@ -31,7 +31,7 @@ export class Notificationservice {
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' });
   }
 
   private armarEnvio(notification: NotificationModel) {

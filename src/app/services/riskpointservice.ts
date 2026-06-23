@@ -27,10 +27,10 @@ export class Riskpointservice {
     return this.http.put(`${this.url}/actualizar/${id}`, {
       ...riskPoint,
       idModel3D: { idModels3D: riskPoint.idModel3D },
-    }, { responseType: 'text' });
+    },{ responseType: 'text' } );
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/eliminar/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}/eliminar/${id}`,{ responseType: 'text' });
   }
 }

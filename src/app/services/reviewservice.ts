@@ -24,10 +24,10 @@ export class Reviewservice {
   }
 
   update(id: number, review: Review) {
-    return this.http.put(`${this.url}/actualizar/${id}`, review, { responseType: 'text' });
+    return this.http.put(`${this.url}/actualizar/${id}`, review,{ responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' });
   }
 }

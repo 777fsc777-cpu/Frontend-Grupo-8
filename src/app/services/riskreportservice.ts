@@ -16,7 +16,7 @@ export class Riskreportservice {
   }
 
   insert(riskReport: RiskReport) {
-    return this.http.post(this.url, riskReport, { responseType: 'text' });
+    return this.http.post(this.url, riskReport,{ responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Riskreportservice {
   }
 
   update(id: number, riskReport: RiskReport) {
-    return this.http.put(`${this.url}/${id}`, riskReport, { responseType: 'text' });
+    return this.http.put(`${this.url}/${id}`, riskReport,{ responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+    return this.http.delete(`${this.url}/${id}`,{ responseType: 'text' });
   }
 }
