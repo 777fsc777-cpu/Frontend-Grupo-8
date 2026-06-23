@@ -1,64 +1,50 @@
-<h1>Lista de contratos</h1>
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Contratos</p>
+      <h1>Lista de contratos</h1>
+    </div>
+    <button mat-flat-button color="primary" routerLink="/contracts/register">
+      <mat-icon>add</mat-icon>
+      Registrar contrato
+    </button>
+  </header>
 
-<button mat-raised-button color="primary" routerLink="/contracts/register">
-  <mat-icon>add</mat-icon>
-  Registrar contrato
-</button>
+  <div class="entity-grid">
+    @for (element of dataSource.connect() | async; track element.idContract) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>description</mat-icon>
+          <mat-card-title>Contrato #{{ element.idContract }}</mat-card-title>
+          <mat-card-subtitle>{{ element.startDate | date:'dd/MM/yyyy HH:mm' }}</mat-card-subtitle>
+        </mat-card-header>
 
-<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
-  <ng-container matColumnDef="c1">
-    <th mat-header-cell *matHeaderCellDef>ID</th>
-    <td mat-cell *matCellDef="let element">{{ element.idContract }}</td>
-  </ng-container>
+        <mat-card-content>
+          <dl>
+            <div><dt>Fin</dt><dd>{{ element.endDate | date:'dd/MM/yyyy HH:mm' }}</dd></div>
+            <div><dt>Monto</dt><dd>{{ element.monthlyAmount }}</dd></div>
+            <div><dt>Estado</dt><dd>{{ element.status }}</dd></div>
+            <div><dt>ID inmueble</dt><dd>{{ element.idEstate }}</dd></div>
+            <div><dt>ID arrendador</dt><dd>{{ element.idLessor }}</dd></div>
+          </dl>
+        </mat-card-content>
 
-  <ng-container matColumnDef="c2">
-    <th mat-header-cell *matHeaderCellDef>Inicio</th>
-    <td mat-cell *matCellDef="let element">{{ element.startDate | date:'dd/MM/yyyy HH:mm' }}</td>
-  </ng-container>
+        <mat-card-actions align="end">
+          <button mat-icon-button color="primary" [routerLink]="['/contracts/edit', element.idContract]" aria-label="Editar contrato">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(element.idContract)" aria-label="Eliminar contrato">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay contratos registrados.</span>
+      </mat-card>
+    }
+  </div>
 
-  <ng-container matColumnDef="c3">
-    <th mat-header-cell *matHeaderCellDef>Fin</th>
-    <td mat-cell *matCellDef="let element">{{ element.endDate | date:'dd/MM/yyyy HH:mm' }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c4">
-    <th mat-header-cell *matHeaderCellDef>Monto</th>
-    <td mat-cell *matCellDef="let element">{{ element.monthlyAmount }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c5">
-    <th mat-header-cell *matHeaderCellDef>Estado</th>
-    <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c6">
-    <th mat-header-cell *matHeaderCellDef>ID inmueble</th>
-    <td mat-cell *matCellDef="let element">{{ element.idEstate }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c7">
-    <th mat-header-cell *matHeaderCellDef>ID arrendador</th>
-    <td mat-cell *matCellDef="let element">{{ element.idLessor }}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="c8">
-    <th mat-header-cell *matHeaderCellDef>Editar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="primary" [routerLink]="['/contracts/edit', element.idContract]">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="c9">
-    <th mat-header-cell *matHeaderCellDef>Eliminar</th>
-    <td mat-cell *matCellDef="let element">
-      <button mat-icon-button color="warn" (click)="eliminar(element.idContract)">
-        <mat-icon>delete</mat-icon>
-      </button>
-    </td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de contratos"></mat-paginator>
+</section>

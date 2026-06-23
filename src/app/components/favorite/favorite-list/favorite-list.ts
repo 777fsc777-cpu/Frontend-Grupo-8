@@ -1,35 +1,54 @@
-import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { AsyncPipe, DatePipe } from '@angular/common';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
-import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { Favorite } from '../../../models/Favorite';
 import { Favoriteservice } from '../../../services/favoriteservice';
 
 @Component({
   selector: 'app-favorite-list',
-  imports: [MatTableModule, DatePipe, MatButtonModule, MatIconModule, MatSnackBarModule, RouterLink],
+  imports: [
+    AsyncPipe,
+    DatePipe,
+    MatButtonModule,
+    MatCardModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatSnackBarModule,
+    RouterLink,
+  ],
   templateUrl: './favorite-list.html',
   styleUrl: './favorite-list.css',
 })
-export class FavoriteList implements OnInit {
+export class FavoriteList implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<Favorite> = new MatTableDataSource();
-  displayedColumns: string[] = ['c1', 'c2', 'c3', 'c4', 'c5', 'c6', 'c7'];
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(
     private fS: Favoriteservice,
     private snackBar: MatSnackBar
   ) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
     this.cargarFavoritos();
   }
 
   cargarFavoritos() {
     this.fS.list().subscribe((data) => {
       this.dataSource.data = data;
+      if (this.paginator) {
+        this.dataSource.paginator = this.paginator;
+        this.paginator.firstPage();
+      }
     });
   }
 
