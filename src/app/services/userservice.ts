@@ -16,7 +16,7 @@ export class Userservice {
   }
 
   insert(user: User) {
-    return this.http.post(`${this.url}/Registrar`, user);
+    return this.http.post(`${this.url}/Registrar`, user, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,11 @@ export class Userservice {
   }
 
   update(id: number, user: User) {
-    return this.http.put(`${this.url}/${id}`, user);
+    return this.http.put(`${this.url}/${id}`, user, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
+
 }

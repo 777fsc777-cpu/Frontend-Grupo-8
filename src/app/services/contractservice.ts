@@ -16,7 +16,7 @@ export class Contractservice {
   }
 
   insert(contract: Contract) {
-    return this.http.post(this.url, contract);
+    return this.http.post(this.url, contract, { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,10 +24,10 @@ export class Contractservice {
   }
 
   update(contract: Contract) {
-    return this.http.put(this.url, contract);
+    return this.http.put(this.url, contract, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 }

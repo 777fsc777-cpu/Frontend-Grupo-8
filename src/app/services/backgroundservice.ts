@@ -16,7 +16,7 @@ export class Backgroundservice {
   }
 
   insert(background: Background) {
-    return this.http.post(this.url, this.armarEnvio(background));
+    return this.http.post(this.url, this.armarEnvio(background), { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -24,11 +24,11 @@ export class Backgroundservice {
   }
 
   update(id: number, background: Background) {
-    return this.http.put(`${this.url}/${id}`, this.armarEnvio(background));
+    return this.http.put(`${this.url}/${id}`, this.armarEnvio(background), { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 
   private armarEnvio(background: Background) {

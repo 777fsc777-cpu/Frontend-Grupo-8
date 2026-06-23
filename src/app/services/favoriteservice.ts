@@ -16,7 +16,7 @@ export class Favoriteservice {
   }
 
   insert(favorite: Favorite) {
-    return this.http.post(this.url, this.armarEnvio(favorite));
+    return this.http.post(this.url, this.armarEnvio(favorite), { responseType: 'text' });
   }
 
   listId(id: number) {
@@ -27,11 +27,11 @@ export class Favoriteservice {
     return this.http.put(this.url, {
       ...this.armarEnvio(favorite),
       idFavorite: favorite.idFavorite,
-    });
+    }, { responseType: 'text' });
   }
 
   delete(id: number) {
-    return this.http.delete(`${this.url}/${id}`);
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
   }
 
   private armarEnvio(favorite: Favorite) {
