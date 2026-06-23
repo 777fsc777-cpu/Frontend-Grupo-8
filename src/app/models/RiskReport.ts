@@ -5,7 +5,7 @@ export class RiskReport {
   riskLevel: string = '';
   description: string = '';
   details: string = '';
-  idUser: number = 0;
+  idUser: any = 0;
   idEstate: number = 0;
   user?: { idUser: number };
   estate?: { idEstate: number };
