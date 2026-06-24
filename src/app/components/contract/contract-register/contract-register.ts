@@ -9,6 +9,9 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Contract } from '../../../models/Contract';
 import { Contractservice } from '../../../services/contractservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 @Component({
   selector: 'app-contract-register',
@@ -20,6 +23,8 @@ import { Contractservice } from '../../../services/contractservice';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   templateUrl: './contract-register.html',
   styleUrl: './contract-register.css',
@@ -31,7 +36,10 @@ export class ContractRegister {
     private cS: Contractservice,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    const d = new Date();
+    this.contract.createdAt = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}T${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  }
 
   aceptar() {
     this.cS.insert(this.contract).subscribe(() => {

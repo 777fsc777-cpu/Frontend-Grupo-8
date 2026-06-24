@@ -22,7 +22,10 @@ export class FavoriteRegister {
     private fS: Favoriteservice,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    const d = new Date();
+    this.favorite.creationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
 
   aceptar() {
     this.fS.insert(this.favorite).subscribe(() => {

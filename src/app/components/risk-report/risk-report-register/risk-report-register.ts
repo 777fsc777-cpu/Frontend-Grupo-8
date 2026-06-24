@@ -8,11 +8,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { RiskReport } from '../../../models/RiskReport';
 import { Riskreportservice } from '../../../services/riskreportservice';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-risk-report-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
   templateUrl: './risk-report-register.html',
   styleUrl: './risk-report-register.css',
 })
@@ -23,7 +22,10 @@ export class RiskReportRegister {
     private rS: Riskreportservice,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    const d = new Date();
+    this.riskReport.creationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
 
   aceptar() {
     this.rS.insert(this.riskReport).subscribe(() => {

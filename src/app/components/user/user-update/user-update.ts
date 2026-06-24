@@ -40,6 +40,8 @@ export class UserUpdate implements OnInit {
     this.uS.listId(this.id).subscribe((data) => {
       this.user = data;
       this.user.password = '';
+      const d = new Date();
+      this.user.updateDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     });
   }
 

@@ -8,11 +8,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Message } from '../../../models/Message';
 import { Messageservice } from '../../../services/messageservice';
-import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-message-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
   templateUrl: './message-register.html',
   styleUrl: './message-register.css',
 })
@@ -23,7 +22,10 @@ export class MessageRegister {
     private mS: Messageservice,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    const d = new Date();
+    this.message.dateSent = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+  }
 
   aceptar() {
     this.mS.insert(this.message).subscribe(() => {

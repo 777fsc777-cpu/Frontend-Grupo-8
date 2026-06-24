@@ -31,7 +31,12 @@ export class UserRegister {
     private uS: Userservice,
     private router: Router,
     private snackBar: MatSnackBar
-  ) {}
+  ) {
+    const d = new Date();
+    const formattedDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    this.user.createdDate = formattedDate;
+    this.user.updateDate = formattedDate;
+  }
 
   aceptar() {
     this.uS.insert(this.user).subscribe(() => {

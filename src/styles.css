@@ -1,5 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 :root {
   --sr-bg: #f3f9ff;
   --sr-card: #ffffff;
@@ -303,4 +305,20 @@ mat-paginator {
     align-items: stretch;
     flex-direction: column;
   }
+
+}
+
+/* Campos de fecha no editables (readonly) */
+mat-form-field:has(input[readonly]) {
+  opacity: 0.7;
+  cursor: not-allowed !important;
+}
+
+mat-form-field:has(input[readonly]) .mdc-text-field,
+mat-form-field:has(input[readonly]) .mat-mdc-text-field-wrapper {
+  background-color: rgba(0, 0, 0, 0.04) !important;
+}
+
+mat-form-field:has(input[readonly]) input {
+  pointer-events: none; /* Evita que se abra el selector de fecha al hacer clic */
 }
