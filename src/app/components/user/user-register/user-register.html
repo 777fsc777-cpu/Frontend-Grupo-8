@@ -38,12 +38,22 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de creación</mat-label>
-    <input matInput type="date" name="createdDate" [(ngModel)]="user.createdDate" required readonly />
+    <input matInput type="date" name="createdDate" [(ngModel)]="user.createdDate" required />
+    <div class="date-error-container">
+      @if (user.createdDate && user.updateDate && user.createdDate > user.updateDate) {
+        <mat-error> La fecha de creación no puede ser posterior a la fecha de actualización </mat-error>
+      }
+    </div>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de actualización</mat-label>
-    <input matInput type="date" name="updateDate" [(ngModel)]="user.updateDate" required readonly />
+    <input matInput type="date" name="updateDate" [(ngModel)]="user.updateDate" required />
+    <div class="date-error-container">
+      @if (user.createdDate && user.updateDate && user.createdDate > user.updateDate) {
+        <mat-error> La fecha de actualización no puede ser anterior a la fecha de creación </mat-error>
+      }
+    </div>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
