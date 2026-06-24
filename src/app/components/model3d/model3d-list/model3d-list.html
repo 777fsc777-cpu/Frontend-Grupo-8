@@ -1,0 +1,48 @@
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Modelos 3D</p>
+      <h1>Lista de modelos 3D</h1>
+    </div>
+    <button mat-flat-button color="primary" routerLink="/models3d/register">
+      <mat-icon>add</mat-icon>
+      Registrar modelo 3D
+    </button>
+  </header>
+
+  <div class="entity-grid">
+    @for (element of dataSource.connect() | async; track element.idModels3D) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>view_in_ar</mat-icon>
+          <mat-card-title>Modelo #{{ element.idModels3D }}</mat-card-title>
+          <mat-card-subtitle>{{ element.state }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <p class="card-note">{{ element.fileURL }}</p>
+          <dl>
+            <div><dt>Fecha</dt><dd>{{ element.createDate | date:'dd/MM/yyyy' }}</dd></div>
+            <div><dt>ID inmueble</dt><dd>{{ element.estate?.idEstate }}</dd></div>
+          </dl>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-icon-button color="primary" [routerLink]="['/models3d/edit', element.idModels3D]" aria-label="Editar modelo">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(element.idModels3D)" aria-label="Eliminar modelo">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay modelos registrados.</span>
+      </mat-card>
+    }
+  </div>
+
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de modelos"></mat-paginator>
+</section>

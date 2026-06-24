@@ -22,10 +22,14 @@ export class ReviewRegister {
     private rS: Reviewservice,
     private router: Router,
     private snackBar: MatSnackBar
+<<<<<<< HEAD
   ) {
     const d = new Date();
     this.review.creationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
+=======
+  ) {}
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
 
   aceptar() {
     this.rS.insert(this.review).subscribe(() => {

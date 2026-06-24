@@ -2,20 +2,177 @@ import { Routes } from '@angular/router';
 import { User } from './components/user/user';
 import { MenuComponent } from './components/menu-component/menu-component';
 import { ComponentList } from './components/user/component-list/component-list';
+import { UserRegister } from './components/user/user-register/user-register';
+import { UserUpdate } from './components/user/user-update/user-update';
+import { Role } from './components/role/role';
+import { RoleList } from './components/role/role-list/role-list';
+import { RoleRegister } from './components/role/role-register/role-register';
+import { RoleUpdate } from './components/role/role-update/role-update';
+import { Background } from './components/background/background';
+import { BackgroundList } from './components/background/background-list/background-list';
+import { BackgroundRegister } from './components/background/background-register/background-register';
+import { BackgroundUpdate } from './components/background/background-update/background-update';
+import { Estate } from './components/estate/estate';
+import { EstateList } from './components/estate/estate-list/estate-list';
+import { EstateRegister } from './components/estate/estate-register/estate-register';
+import { EstateUpdate } from './components/estate/estate-update/estate-update';
+import { Favorite } from './components/favorite/favorite';
+import { FavoriteList } from './components/favorite/favorite-list/favorite-list';
+import { FavoriteRegister } from './components/favorite/favorite-register/favorite-register';
+import { FavoriteUpdate } from './components/favorite/favorite-update/favorite-update';
+import { Contract } from './components/contract/contract';
+import { ContractList } from './components/contract/contract-list/contract-list';
+import { ContractRegister } from './components/contract/contract-register/contract-register';
+import { ContractUpdate } from './components/contract/contract-update/contract-update';
+import { Conversation } from './components/conversation/conversation';
+import { ConversationList } from './components/conversation/conversation-list/conversation-list';
+import { ConversationRegister } from './components/conversation/conversation-register/conversation-register';
+import { ConversationUpdate } from './components/conversation/conversation-update/conversation-update';
+import { Message } from './components/message/message';
+import { MessageList } from './components/message/message-list/message-list';
+import { MessageRegister } from './components/message/message-register/message-register';
+import { MessageUpdate } from './components/message/message-update/message-update';
+import { Notification } from './components/notification/notification';
+import { NotificationList } from './components/notification/notification-list/notification-list';
+import { NotificationRegister } from './components/notification/notification-register/notification-register';
+import { NotificationUpdate } from './components/notification/notification-update/notification-update';
+import { Review } from './components/review/review';
+import { ReviewList } from './components/review/review-list/review-list';
+import { ReviewRegister } from './components/review/review-register/review-register';
+import { ReviewUpdate } from './components/review/review-update/review-update';
+import { RiskReport } from './components/risk-report/risk-report';
+import { RiskReportList } from './components/risk-report/risk-report-list/risk-report-list';
+import { RiskReportRegister } from './components/risk-report/risk-report-register/risk-report-register';
+import { RiskReportUpdate } from './components/risk-report/risk-report-update/risk-report-update';
+import { RiskPoint } from './components/risk-point/risk-point';
+import { RiskPointList } from './components/risk-point/risk-point-list/risk-point-list';
+import { RiskPointRegister } from './components/risk-point/risk-point-register/risk-point-register';
+import { RiskPointUpdate } from './components/risk-point/risk-point-update/risk-point-update';
+import { Model3d } from './components/model3d/model3d';
+import { Model3dList } from './components/model3d/model3d-list/model3d-list';
+import { Model3dRegister } from './components/model3d/model3d-register/model3d-register';
+import { Model3dUpdate } from './components/model3d/model3d-update/model3d-update';
 
 export const routes: Routes = [
   {
     path: '',
-    component: MenuComponent
+    component: MenuComponent,
   },
   {
     path: 'users',
     component: User,
     children: [
-      {
-        path: 'list',
-        component: ComponentList
-      }
-    ]
-  }
+      { path: 'list', component: ComponentList },
+      { path: 'register', component: UserRegister },
+      { path: 'edit/:id', component: UserUpdate },
+    ],
+  },
+  {
+    path: 'roles',
+    component: Role,
+    children: [
+      { path: 'list', component: RoleList },
+      { path: 'register', component: RoleRegister },
+      { path: 'edit/:id', component: RoleUpdate },
+    ],
+  },
+  {
+    path: 'backgrounds',
+    component: Background,
+    children: [
+      { path: 'list', component: BackgroundList },
+      { path: 'register', component: BackgroundRegister },
+      { path: 'edit/:id', component: BackgroundUpdate },
+    ],
+  },
+  {
+    path: 'estates',
+    component: Estate,
+    children: [
+      { path: 'list', component: EstateList },
+      { path: 'register', component: EstateRegister },
+      { path: 'edit/:id', component: EstateUpdate },
+    ],
+  },
+  {
+    path: 'favorites',
+    component: Favorite,
+    children: [
+      { path: 'list', component: FavoriteList },
+      { path: 'register', component: FavoriteRegister },
+      { path: 'edit/:id', component: FavoriteUpdate },
+    ],
+  },
+  {
+    path: 'contracts',
+    component: Contract,
+    children: [
+      { path: 'list', component: ContractList },
+      { path: 'register', component: ContractRegister },
+      { path: 'edit/:id', component: ContractUpdate },
+    ],
+  },
+  {
+    path: 'conversations',
+    component: Conversation,
+    children: [
+      { path: 'list', component: ConversationList },
+      { path: 'register', component: ConversationRegister },
+      { path: 'edit/:id', component: ConversationUpdate },
+    ],
+  },
+  {
+    path: 'messages',
+    component: Message,
+    children: [
+      { path: 'list', component: MessageList },
+      { path: 'register', component: MessageRegister },
+      { path: 'edit/:id', component: MessageUpdate },
+    ],
+  },
+  {
+    path: 'notifications',
+    component: Notification,
+    children: [
+      { path: 'list', component: NotificationList },
+      { path: 'register', component: NotificationRegister },
+      { path: 'edit/:id', component: NotificationUpdate },
+    ],
+  },
+  {
+    path: 'reviews',
+    component: Review,
+    children: [
+      { path: 'list', component: ReviewList },
+      { path: 'register', component: ReviewRegister },
+      { path: 'edit/:id', component: ReviewUpdate },
+    ],
+  },
+  {
+    path: 'risk-reports',
+    component: RiskReport,
+    children: [
+      { path: 'list', component: RiskReportList },
+      { path: 'register', component: RiskReportRegister },
+      { path: 'edit/:id', component: RiskReportUpdate },
+    ],
+  },
+  {
+    path: 'risk-points',
+    component: RiskPoint,
+    children: [
+      { path: 'list', component: RiskPointList },
+      { path: 'register', component: RiskPointRegister },
+      { path: 'edit/:id', component: RiskPointUpdate },
+    ],
+  },
+  {
+    path: 'models3d',
+    component: Model3d,
+    children: [
+      { path: 'list', component: Model3dList },
+      { path: 'register', component: Model3dRegister },
+      { path: 'edit/:id', component: Model3dUpdate },
+    ],
+  },
 ];

@@ -1,0 +1,48 @@
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Conversaciones</p>
+      <h1>Lista de conversaciones</h1>
+    </div>
+    <button mat-flat-button color="primary" routerLink="/conversations/register">
+      <mat-icon>add</mat-icon>
+      Registrar conversacion
+    </button>
+  </header>
+
+  <div class="entity-grid">
+    @for (element of dataSource.connect() | async; track element.id) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>forum</mat-icon>
+          <mat-card-title>Conversacion #{{ element.id }}</mat-card-title>
+          <mat-card-subtitle>Inmueble {{ element.idEstate }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <dl>
+            <div><dt>Usuario 1</dt><dd>{{ element.idUser1 }}</dd></div>
+            <div><dt>Usuario 2</dt><dd>{{ element.idUser2 }}</dd></div>
+            <div><dt>ID inmueble</dt><dd>{{ element.idEstate }}</dd></div>
+          </dl>
+        </mat-card-content>
+
+        <mat-card-actions align="end">
+          <button mat-icon-button color="primary" [routerLink]="['/conversations/edit', element.id]" aria-label="Editar conversacion">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button color="warn" (click)="eliminar(element.id)" aria-label="Eliminar conversacion">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay conversaciones registradas.</span>
+      </mat-card>
+    }
+  </div>
+
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de conversaciones"></mat-paginator>
+</section>

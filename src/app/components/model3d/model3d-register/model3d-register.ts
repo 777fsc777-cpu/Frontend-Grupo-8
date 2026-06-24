@@ -8,10 +8,18 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Model3d } from '../../../models/Model3d';
 import { Model3dservice } from '../../../services/model3dservice';
+<<<<<<< HEAD
 
 @Component({
   selector: 'app-model3d-register',
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+=======
+import { MatSelectModule } from '@angular/material/select';
+
+@Component({
+  selector: 'app-model3d-register',
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   templateUrl: './model3d-register.html',
   styleUrl: './model3d-register.css',
 })
@@ -22,10 +30,14 @@ export class Model3dRegister {
     private mS: Model3dservice,
     private router: Router,
     private snackBar: MatSnackBar
+<<<<<<< HEAD
   ) {
     const d = new Date();
     this.model3d.createDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
+=======
+  ) {}
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
 
   aceptar() {
     this.mS.insert(this.model3d).subscribe(() => {

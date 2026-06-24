@@ -1,41 +1,140 @@
 <h1>Actualizar reporte de riesgo</h1>
 
 <form #riskReportForm="ngForm" (ngSubmit)="aceptar()">
+<<<<<<< HEAD
   <mat-form-field appearance="outline">
     <mat-label>Tipo</mat-label>
     <input matInput name="type" [(ngModel)]="riskReport.type" required />
+=======
+ <mat-form-field appearance="outline">
+    <mat-label>Tipo</mat-label>
+    <input matInput name="type" [(ngModel)]="riskReport.type" required #typeInput="ngModel" />
+    <div class="mensaje-abajo">
+      @if (typeInput.invalid && typeInput.touched) {
+        @if (typeInput.errors?.['required']) {
+          <mat-error>El campo Tipo es requerido</mat-error>
+        }
+      }
+    </div>
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de creación</mat-label>
+<<<<<<< HEAD
     <input matInput type="date" name="creationDate" [(ngModel)]="riskReport.creationDate" required readonly />
+=======
+    <input matInput type="date" name="creationDate" [(ngModel)]="riskReport.creationDate" required #creationDateInput="ngModel" />
+    <div class="mensaje-abajo">
+      @if (creationDateInput.invalid && creationDateInput.touched) {
+        @if (creationDateInput.errors?.['required']) {
+          <mat-error>El campo Fecha de creación es requerido</mat-error>
+        }
+      }
+    </div>
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Nivel de riesgo</mat-label>
+<<<<<<< HEAD
     <input matInput name="riskLevel" [(ngModel)]="riskReport.riskLevel" required />
+=======
+    <mat-select name="riskLevel" [(ngModel)]="riskReport.riskLevel" required #riskLevelInput="ngModel">
+      <mat-option value="Alto">Alto</mat-option>
+      <mat-option value="Medio">Medio</mat-option>
+      <mat-option value="Bajo">Bajo</mat-option>
+    </mat-select>
+    <div class="mensaje-abajo">
+      @if (riskLevelInput.invalid && riskLevelInput.touched) {
+        @if (riskLevelInput.errors?.['required']) {
+          <mat-error>El campo Nivel de riesgo es requerido</mat-error>
+        }
+      }
+    </div>
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Descripción</mat-label>
+<<<<<<< HEAD
     <textarea matInput name="description" [(ngModel)]="riskReport.description" required></textarea>
+=======
+    <textarea matInput name="description" [(ngModel)]="riskReport.description" required [maxlength]="1000" #descriptionInput="ngModel"></textarea>
+    <mat-hint align="end">{{ riskReport.description?.length || 0 }} / 1000</mat-hint>
+    <div class="mensaje-abajo">
+      @if (descriptionInput.invalid && descriptionInput.touched) {
+        @if (descriptionInput.errors?.['required']) {
+          <mat-error>El campo Descripción es requerido</mat-error>
+        }
+        @if (descriptionInput.errors?.['maxlength']) {
+          <mat-error>Máximo 1000 caracteres</mat-error>
+        }
+      }
+    </div>
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Detalles</mat-label>
+<<<<<<< HEAD
     <textarea matInput name="details" [(ngModel)]="riskReport.details" required></textarea>
+=======
+    <textarea matInput name="details" [(ngModel)]="riskReport.details" required [maxlength]="1000" #detailsInput="ngModel"></textarea>
+    <mat-hint align="end">{{ riskReport.details?.length || 0 }} / 1000</mat-hint>
+    <div class="mensaje-abajo">
+      @if (detailsInput.invalid && detailsInput.touched) {
+        @if (detailsInput.errors?.['required']) {
+          <mat-error>El campo Detalles es requerido</mat-error>
+        }
+        @if (detailsInput.errors?.['maxlength']) {
+          <mat-error>Máximo 1000 caracteres</mat-error>
+        }
+      }
+    </div>
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>ID usuario</mat-label>
+<<<<<<< HEAD
     <input matInput type="number" name="idUser" [(ngModel)]="riskReport.idUser" required min="1" />
+=======
+    <input matInput type="number" name="idUser" [(ngModel)]="riskReport.idUser" required min="1" #idUserInput="ngModel" />
+    <div class="mensaje-abajo">
+      @if (idUserInput.invalid && idUserInput.touched) {
+        @if (idUserInput.errors?.['required']) {
+          <mat-error>El campo ID usuario es requerido</mat-error>
+        }
+        @if (idUserInput.errors?.['min']) {
+          <mat-error>Ingresa un valor positivo</mat-error>
+        }
+      }
+    </div>
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>ID inmueble</mat-label>
+<<<<<<< HEAD
     <input matInput type="number" name="idEstate" [(ngModel)]="riskReport.idEstate" required min="1" />
   </mat-form-field>
 
+=======
+    <input matInput type="number" name="idEstate" [(ngModel)]="riskReport.idEstate" required min="1" #idEstateInput="ngModel" />
+    <div class="mensaje-abajo">
+      @if (idEstateInput.invalid && idEstateInput.touched) {
+        @if (idEstateInput.errors?.['required']) {
+          <mat-error>El campo ID inmueble es requerido</mat-error>
+        }
+        @if (idEstateInput.errors?.['min']) {
+          <mat-error>Ingresa un valor positivo</mat-error>
+        }
+      }
+    </div>
+  </mat-form-field>
+  
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   <button mat-raised-button color="primary" type="submit" [disabled]="riskReportForm.invalid">
     <mat-icon>save</mat-icon>
     Actualizar

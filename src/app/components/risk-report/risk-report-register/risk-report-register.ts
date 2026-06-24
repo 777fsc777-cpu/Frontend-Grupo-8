@@ -8,10 +8,18 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { RiskReport } from '../../../models/RiskReport';
 import { Riskreportservice } from '../../../services/riskreportservice';
+<<<<<<< HEAD
 
 @Component({
   selector: 'app-risk-report-register',
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+=======
+import { MatSelectModule } from '@angular/material/select';
+
+@Component({
+  selector: 'app-risk-report-register',
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   templateUrl: './risk-report-register.html',
   styleUrl: './risk-report-register.css',
 })
@@ -22,10 +30,14 @@ export class RiskReportRegister {
     private rS: Riskreportservice,
     private router: Router,
     private snackBar: MatSnackBar
+<<<<<<< HEAD
   ) {
     const d = new Date();
     this.riskReport.creationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
+=======
+  ) {}
+>>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
 
   aceptar() {
     this.rS.insert(this.riskReport).subscribe(() => {

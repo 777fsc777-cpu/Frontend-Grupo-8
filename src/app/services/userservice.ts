@@ -14,4 +14,21 @@ export class Userservice {
   list() {
     return this.http.get<User[]>(`${this.url}/listar`);
   }
+
+  insert(user: User) {
+    return this.http.post(`${this.url}/Registrar`, user, { responseType: 'text' });
+  }
+
+  listId(id: number) {
+    return this.http.get<User>(`${this.url}/listarporId/${id}`);
+  }
+
+  update(id: number, user: User) {
+    return this.http.put(`${this.url}/${id}`, user, { responseType: 'text' });
+  }
+
+  delete(id: number) {
+    return this.http.delete(`${this.url}/${id}`, { responseType: 'text' });
+  }
+
 }
