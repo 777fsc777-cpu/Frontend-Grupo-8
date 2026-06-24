@@ -1,44 +1,86 @@
 <h1>Actualizar inmueble</h1>
 
 <form #estateForm="ngForm" (ngSubmit)="aceptar()">
-  <mat-form-field appearance="outline">
+   <mat-form-field appearance="outline">
     <mat-label>Título</mat-label>
-    <input matInput name="title" [(ngModel)]="estate.title" required />
+    <input matInput name="title" [(ngModel)]="estate.title" required #titleInput="ngModel" />
+    @if (titleInput.invalid && titleInput.touched) {
+      <mat-error>El campo Título es requerido</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Descripción</mat-label>
-    <textarea matInput name="description" [(ngModel)]="estate.description" required></textarea>
+    <textarea matInput name="description" [(ngModel)]="estate.description" required [maxlength]="1000" #descriptionInput="ngModel"></textarea>
+    <mat-hint align="end">{{ estate.description?.length || 0 }} / 1000</mat-hint>
+    @if (descriptionInput.invalid && descriptionInput.touched) {
+      @if (descriptionInput.errors?.['required']) {
+        <mat-error>El campo Descripción es requerido</mat-error>
+      }
+      @if (descriptionInput.errors?.['maxlength']) {
+        <mat-error>Máximo 1000 caracteres</mat-error>
+      }
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Dirección</mat-label>
-    <input matInput name="adress" [(ngModel)]="estate.adress" required />
+    <input matInput name="adress" [(ngModel)]="estate.adress" required #adressInput="ngModel" />
+    @if (adressInput.invalid && adressInput.touched) {
+      <mat-error>El campo Dirección es requerido</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Distrito</mat-label>
-    <input matInput name="district" [(ngModel)]="estate.district" required />
+    <input matInput name="district" [(ngModel)]="estate.district" required #districtInput="ngModel" />
+    @if (districtInput.invalid && districtInput.touched) {
+      <mat-error>El campo Distrito es requerido</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Ciudad</mat-label>
-    <input matInput name="city" [(ngModel)]="estate.city" required />
+    <input matInput name="city" [(ngModel)]="estate.city" required #cityInput="ngModel" />
+    @if (cityInput.invalid && cityInput.touched) {
+      <mat-error>El campo Ciudad es requerido</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Precio mensual</mat-label>
-    <input matInput type="number" name="monthlyPrice" [(ngModel)]="estate.monthlyPrice" required min="1" />
+    <input matInput type="number" name="monthlyPrice" [(ngModel)]="estate.monthlyPrice" required min="1" #monthlyPriceInput="ngModel" />
+    @if (monthlyPriceInput.invalid && monthlyPriceInput.touched) {
+      @if (monthlyPriceInput.errors?.['required']) {
+        <mat-error>El campo Precio mensual es requerido</mat-error>
+      }
+      @if (monthlyPriceInput.errors?.['min']) {
+        <mat-error>Ingresa un valor positivo</mat-error>
+      }
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Tipo</mat-label>
-    <input matInput name="type" [(ngModel)]="estate.type" required />
+    <mat-select name="type" [(ngModel)]="estate.type" required #typeInput="ngModel">
+      @if (typeInput.invalid && typeInput.touched) {
+        <mat-error>El campo Tipo es requerido</mat-error>
+      }
+      <mat-option value="Casa">Casa</mat-option>
+      <mat-option value="Departamento">Departamento</mat-option>
+      <mat-option value="Estudio">Estudio</mat-option>
+      <mat-option value="Flat">Flat</mat-option>
+      <mat-option value="Habitación">Habitación</mat-option>
+      <mat-option value="Loft">Loft</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Estado</mat-label>
-    <mat-select name="state" [(ngModel)]="estate.state" required>
+    <mat-select name="state" [(ngModel)]="estate.state" required #stateInput="ngModel">
+      @if (stateInput.invalid && stateInput.touched) {
+        <mat-error>El campo Estado es requerido</mat-error>
+      }
       <mat-option [value]="true">Disponible</mat-option>
       <mat-option [value]="false">No disponible</mat-option>
     </mat-select>
@@ -46,29 +88,64 @@
 
   <mat-form-field appearance="outline">
     <mat-label>Habitaciones</mat-label>
-    <input matInput type="number" name="rooms" [(ngModel)]="estate.rooms" required min="1" />
+    <input matInput type="number" name="rooms" [(ngModel)]="estate.rooms" required min="1" #roomsInput="ngModel" />
+    @if (roomsInput.invalid && roomsInput.touched) {
+      @if (roomsInput.errors?.['required']) {
+        <mat-error>El campo Habitaciones es requerido</mat-error>
+      }
+      @if (roomsInput.errors?.['min']) {
+        <mat-error>Ingresa un valor positivo</mat-error>
+      }
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Baños</mat-label>
-    <input matInput type="number" name="bathrooms" [(ngModel)]="estate.bathrooms" required min="1" />
+    <input matInput type="number" name="bathrooms" [(ngModel)]="estate.bathrooms" required min="1" #bathroomsInput="ngModel" />
+    @if (bathroomsInput.invalid && bathroomsInput.touched) {
+      @if (bathroomsInput.errors?.['required']) {
+        <mat-error>El campo Baños es requerido</mat-error>
+      }
+      @if (bathroomsInput.errors?.['min']) {
+        <mat-error>Ingresa un valor positivo</mat-error>
+      }
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Área m2</mat-label>
-    <input matInput type="number" name="areaM2" [(ngModel)]="estate.areaM2" required min="1" />
+    <input matInput type="number" name="areaM2" [(ngModel)]="estate.areaM2" required min="1" #areaM2Input="ngModel" />
+    @if (areaM2Input.invalid && areaM2Input.touched) {
+      @if (areaM2Input.errors?.['required']) {
+        <mat-error>El campo Área m2 es requerido</mat-error>
+      }
+      @if (areaM2Input.errors?.['min']) {
+        <mat-error>Ingresa un valor positivo</mat-error>
+      }
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de creación</mat-label>
-    <input matInput type="date" name="creationDate" [(ngModel)]="estate.creationDate" required />
+    <input matInput type="date" name="creationDate" [(ngModel)]="estate.creationDate" required #creationDateInput="ngModel" />
+    @if (creationDateInput.invalid && creationDateInput.touched) {
+      <mat-error>El campo Fecha de creación es requerido</mat-error>
+    }
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>ID usuario</mat-label>
-    <input matInput type="number" name="idUser" [(ngModel)]="estate.idUser" required min="1" />
+    <input matInput type="number" name="idUser" [(ngModel)]="estate.idUser" required min="1" #idUserInput="ngModel" />
+    @if (idUserInput.invalid && idUserInput.touched) {
+      @if (idUserInput.errors?.['required']) {
+        <mat-error>El campo ID usuario es requerido</mat-error>
+      }
+      @if (idUserInput.errors?.['min']) {
+        <mat-error>Ingresa un valor positivo</mat-error>
+      }
+    }
   </mat-form-field>
-
+  
   <button mat-raised-button color="primary" type="submit" [disabled]="estateForm.invalid">
     <mat-icon>save</mat-icon>
     Actualizar

@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Role } from '../../../models/Role';
 import { Roleservice } from '../../../services/roleservice';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-role-update',
@@ -18,6 +19,7 @@ import { Roleservice } from '../../../services/roleservice';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatSelectModule,
   ],
   templateUrl: './role-update.html',
   styleUrl: './role-update.css',

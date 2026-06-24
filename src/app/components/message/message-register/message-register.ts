@@ -8,10 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Message } from '../../../models/Message';
 import { Messageservice } from '../../../services/messageservice';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-message-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
   templateUrl: './message-register.html',
   styleUrl: './message-register.css',
 })
