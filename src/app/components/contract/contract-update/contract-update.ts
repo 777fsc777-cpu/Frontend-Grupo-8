@@ -9,11 +9,8 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Contract } from '../../../models/Contract';
 import { Contractservice } from '../../../services/contractservice';
-<<<<<<< HEAD
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-=======
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
 
 @Component({
   selector: 'app-contract-update',
@@ -25,11 +22,8 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
-<<<<<<< HEAD
     MatDatepickerModule,
     MatNativeDateModule,
-=======
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   ],
   templateUrl: './contract-update.html',
   styleUrl: './contract-update.css',

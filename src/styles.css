@@ -1,11 +1,7 @@
 
-<<<<<<< HEAD
-<<<<<<< Updated upstream
+
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-=======
-=======
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
 :root {
   --sr-bg: #f3f9ff;
   --sr-card: #ffffff;
@@ -309,7 +305,7 @@ mat-paginator {
     align-items: stretch;
     flex-direction: column;
   }
-<<<<<<< HEAD
+
 }
 
 /* Campos de fecha no editables (readonly) */
@@ -326,7 +322,3 @@ mat-form-field:has(input[readonly]) .mat-mdc-text-field-wrapper {
 mat-form-field:has(input[readonly]) input {
   pointer-events: none; /* Evita que se abra el selector de fecha al hacer clic */
 }
->>>>>>> Stashed changes
-=======
-}
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7

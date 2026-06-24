@@ -8,18 +8,10 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Background } from '../../../models/Background';
 import { Backgroundservice } from '../../../services/backgroundservice';
-<<<<<<< HEAD
 
 @Component({
   selector: 'app-background-register',
   imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
-=======
-import { MatSelectModule } from '@angular/material/select';
-
-@Component({
-  selector: 'app-background-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   templateUrl: './background-register.html',
   styleUrl: './background-register.css',
 })
@@ -30,14 +22,10 @@ export class BackgroundRegister {
     private bS: Backgroundservice,
     private router: Router,
     private snackBar: MatSnackBar
-<<<<<<< HEAD
   ) {
     const d = new Date();
     this.background.registrationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
   }
-=======
-  ) {}
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
 
   aceptar() {
     this.bS.insert(this.background).subscribe(() => {

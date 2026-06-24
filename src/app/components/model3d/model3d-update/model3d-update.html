@@ -3,72 +3,22 @@
 <form #model3dForm="ngForm" (ngSubmit)="aceptar()">
   <mat-form-field appearance="outline">
     <mat-label>Archivo URL</mat-label>
-<<<<<<< HEAD
     <input matInput name="fileURL" [(ngModel)]="model3d.fileURL" required />
-=======
-    <input matInput name="fileURL" [(ngModel)]="model3d.fileURL" required #fileURLInput="ngModel" />
-    <div class="mensaje-abajo">
-      @if (fileURLInput.invalid && fileURLInput.touched) {
-        @if (fileURLInput.errors?.['required']) {
-          <mat-error>El campo Archivo URL es requerido</mat-error>
-        }
-      }
-    </div>
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Estado</mat-label>
-<<<<<<< HEAD
     <input matInput name="state" [(ngModel)]="model3d.state" required />
-=======
-    <mat-select name="state" [(ngModel)]="model3d.state" required #stateInput="ngModel">
-      <mat-option value="Activo">Activo</mat-option>
-      <mat-option value="Inactivo">Inactivo</mat-option>
-    </mat-select>
-    <div class="mensaje-abajo">
-      @if (stateInput.invalid && stateInput.touched) {
-        @if (stateInput.errors?.['required']) {
-          <mat-error>El campo Estado es requerido</mat-error>
-        }
-      }
-    </div>
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de creación</mat-label>
-<<<<<<< HEAD
     <input matInput type="date" name="createDate" [(ngModel)]="model3d.createDate" required readonly />
-=======
-    <input matInput type="date" name="createDate" [(ngModel)]="model3d.createDate" required #createDateInput="ngModel" />
-    <div class="mensaje-abajo">
-      @if (createDateInput.invalid && createDateInput.touched) {
-        @if (createDateInput.errors?.['required']) {
-          <mat-error>El campo Fecha de creación es requerido</mat-error>
-        }
-      }
-    </div>
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>ID inmueble</mat-label>
-<<<<<<< HEAD
     <input matInput type="number" name="idEstate" [(ngModel)]="model3d.idEstate" required min="1" />
-=======
-    <input matInput type="number" name="idEstate" [(ngModel)]="model3d.idEstate" required min="1" #idEstateInput="ngModel" />
-    <div class="mensaje-abajo">
-      @if (idEstateInput.invalid && idEstateInput.touched) {
-        @if (idEstateInput.errors?.['required']) {
-          <mat-error>El campo ID inmueble es requerido</mat-error>
-        }
-        @if (idEstateInput.errors?.['min']) {
-          <mat-error>Ingresa un valor positivo</mat-error>
-        }
-      }
-    </div>
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="model3dForm.invalid">

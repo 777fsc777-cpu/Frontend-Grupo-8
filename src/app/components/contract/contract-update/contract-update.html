@@ -3,24 +3,16 @@
 <form #contractForm="ngForm" (ngSubmit)="aceptar()">
   <mat-form-field appearance="outline">
     <mat-label>Fecha inicio</mat-label>
-<<<<<<< HEAD
     <input matInput [matDatepicker]="startDatePicker" name="startDate" [(ngModel)]="contract.startDate" required />
     <mat-datepicker-toggle matIconSuffix [for]="startDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #startDatePicker></mat-datepicker>
-=======
-    <input matInput type="datetime-local" name="startDate" [(ngModel)]="contract.startDate" required />
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha fin</mat-label>
-<<<<<<< HEAD
     <input matInput [matDatepicker]="endDatePicker" name="endDate" [(ngModel)]="contract.endDate" required />
     <mat-datepicker-toggle matIconSuffix [for]="endDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #endDatePicker></mat-datepicker>
-=======
-    <input matInput type="datetime-local" name="endDate" [(ngModel)]="contract.endDate" required />
->>>>>>> dc06b01b444d9e8b3f36deaca1ad29dbbefd41a7
   </mat-form-field>
 
   <mat-form-field appearance="outline">

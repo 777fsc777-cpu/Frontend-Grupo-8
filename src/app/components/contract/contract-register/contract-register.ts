@@ -12,6 +12,7 @@ import { Contractservice } from '../../../services/contractservice';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 
+
 @Component({
   selector: 'app-contract-register',
   imports: [
