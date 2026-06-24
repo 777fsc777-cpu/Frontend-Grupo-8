@@ -8,10 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Model3d } from '../../../models/Model3d';
 import { Model3dservice } from '../../../services/model3dservice';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-model3d-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
   templateUrl: './model3d-register.html',
   styleUrl: './model3d-register.css',
 })

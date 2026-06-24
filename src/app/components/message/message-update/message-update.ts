@@ -8,10 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Message } from '../../../models/Message';
 import { Messageservice } from '../../../services/messageservice';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-message-update',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
   templateUrl: './message-update.html',
   styleUrl: './message-update.css',
 })

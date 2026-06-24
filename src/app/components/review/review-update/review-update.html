@@ -1,35 +1,78 @@
 <h1>Actualizar reseña</h1>
 
 <form #reviewForm="ngForm" (ngSubmit)="aceptar()">
-  <mat-form-field appearance="outline">
+ <mat-form-field appearance="outline">
     <mat-label>Calificación</mat-label>
-    <input matInput type="number" name="calification" [(ngModel)]="review.calification" required min="1" />
+    <input matInput type="number" name="calification" [(ngModel)]="review.calification" required min="1" #calificationInput="ngModel" />
+    
+    <div class="mensaje-abajo">
+      @if (calificationInput.invalid && calificationInput.touched) {
+        @if (calificationInput.errors?.['required']) {
+          <mat-error>El campo Calificación es requerido</mat-error>
+        }
+        @if (calificationInput.errors?.['min']) {
+          <mat-error>Ingresa un valor positivo</mat-error>
+        }
+      }
+    </div>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Comentario</mat-label>
-    <textarea matInput name="comment" [(ngModel)]="review.comment" required></textarea>
+    <textarea matInput name="comment" [(ngModel)]="review.comment" required #commentInput="ngModel"></textarea>
+    
+    <div class="mensaje-abajo">
+      @if (commentInput.invalid && commentInput.touched) {
+        @if (commentInput.errors?.['required']) {
+          <mat-error>El campo Comentario es requerido</mat-error>
+        }
+      }
+    </div>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>Fecha de creación</mat-label>
-    <input matInput type="date" name="creationDate" [(ngModel)]="review.creationDate" required />
+    <input matInput type="date" name="creationDate" [(ngModel)]="review.creationDate" required #creationDateInput="ngModel" />
+    
+    <div class="mensaje-abajo">
+      @if (creationDateInput.invalid && creationDateInput.touched) {
+        <mat-error>El campo Fecha de creación es requerido</mat-error>
+      }
+    </div>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>ID usuario</mat-label>
-    <input matInput type="number" name="idUser" [(ngModel)]="review.idUser" required min="1" />
+    <input matInput type="number" name="idUser" [(ngModel)]="review.idUser" required min="1" #idUserInput="ngModel" />
+    
+    <div class="mensaje-abajo">
+      @if (idUserInput.invalid && idUserInput.touched) {
+        @if (idUserInput.errors?.['required']) {
+          <mat-error>El campo ID usuario es requerido</mat-error>
+        }
+        @if (idUserInput.errors?.['min']) {
+          <mat-error>Ingresa un valor positivo</mat-error>
+        }
+      }
+    </div>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
     <mat-label>ID inmueble</mat-label>
-    <input matInput type="number" name="idEstate" [(ngModel)]="review.idEstate" required min="1" />
+    <input matInput type="number" name="idEstate" [(ngModel)]="review.idEstate" required min="1" #idEstateInput="ngModel" />
+    
+    <div class="mensaje-abajo">
+      @if (idEstateInput.invalid && idEstateInput.touched) {
+        @if (idEstateInput.errors?.['required']) {
+          <mat-error>El campo ID inmueble es requerido</mat-error>
+        }
+        @if (idEstateInput.errors?.['min']) {
+          <mat-error>Ingresa un valor positivo</mat-error>
+        }
+      }
+    </div>
   </mat-form-field>
-
-  <button mat-raised-button color="primary" type="submit" [disabled]="reviewForm.invalid">
-    <mat-icon>save</mat-icon>
-    Actualizar
-  </button>
+  
 
   <button mat-button type="button" (click)="cancelar()">Cancelar</button>
 </form>

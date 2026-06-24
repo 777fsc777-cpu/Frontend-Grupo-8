@@ -8,10 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Background } from '../../../models/Background';
 import { Backgroundservice } from '../../../services/backgroundservice';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-background-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
   templateUrl: './background-register.html',
   styleUrl: './background-register.css',
 })

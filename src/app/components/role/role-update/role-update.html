@@ -3,7 +3,14 @@
 <form #roleForm="ngForm" (ngSubmit)="aceptar()">
   <mat-form-field appearance="outline">
     <mat-label>Rol</mat-label>
-    <input matInput name="rol" [(ngModel)]="role.rol" required />
+    <mat-select name="rol" [(ngModel)]="role.rol" required #direccionInput="ngModel" required>
+        @if (direccionInput.invalid && direccionInput.touched) {
+          <mat-error>Este campo es requerido</mat-error>
+        }
+      <mat-option value="Administrador">Administrador</mat-option>
+      <mat-option value="arrendatario">Arrendatorio</mat-option>
+      <mat-option value="arrendador">Arrendador</mat-option>
+    </mat-select>
   </mat-form-field>
 
   <mat-form-field appearance="outline">

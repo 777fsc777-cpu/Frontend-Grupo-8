@@ -25,7 +25,7 @@
             <div><dt>Telefono</dt><dd>{{ element.phoneNumber }}</dd></div>
             <div><dt>Rol</dt><dd>{{ element.role }}</dd></div>
             <div><dt>Creado</dt><dd>{{ element.createdDate | date:'dd/MM/yyyy' }}</dd></div>
-            <div><dt>Habilitado</dt><dd>{{ element.enabled }}</dd></div>
+            <div><dt>Habilitado</dt><dd>{{ element.enabled ? 'Activo':'Desactivado'}}</dd></div>
           </dl>
         </mat-card-content>
 

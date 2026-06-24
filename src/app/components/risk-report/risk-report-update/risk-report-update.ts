@@ -8,10 +8,11 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RiskReport } from '../../../models/RiskReport';
 import { Riskreportservice } from '../../../services/riskreportservice';
+import { MatSelectModule } from '@angular/material/select';
 
 @Component({
   selector: 'app-risk-report-update',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
   templateUrl: './risk-report-update.html',
   styleUrl: './risk-report-update.css',
 })
