@@ -1,5 +1,5 @@
 export const environment = {
     production: false,
-    base: 'http://localhost:8080'
+    base: 'https://backend-grupo-8-tgl2.onrender.com'
 };
 
