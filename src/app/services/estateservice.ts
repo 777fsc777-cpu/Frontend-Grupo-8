@@ -26,7 +26,7 @@ export class Estateservice {
   update(estate: Estate) {
     return this.http.put(`${this.url}/actualizar`, {
       ...estate,
-      users: { idUser: estate.idUser },
+      idUser: { idUser: estate.idUser },
     }, { responseType: 'text' });
   }
 
