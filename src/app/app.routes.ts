@@ -16,22 +16,10 @@ import { Estate } from './components/estate/estate';
 import { EstateList } from './components/estate/estate-list/estate-list';
 import { EstateRegister } from './components/estate/estate-register/estate-register';
 import { EstateUpdate } from './components/estate/estate-update/estate-update';
-import { Favorite } from './components/favorite/favorite';
-import { FavoriteList } from './components/favorite/favorite-list/favorite-list';
-import { FavoriteRegister } from './components/favorite/favorite-register/favorite-register';
-import { FavoriteUpdate } from './components/favorite/favorite-update/favorite-update';
 import { Contract } from './components/contract/contract';
 import { ContractList } from './components/contract/contract-list/contract-list';
 import { ContractRegister } from './components/contract/contract-register/contract-register';
 import { ContractUpdate } from './components/contract/contract-update/contract-update';
-import { Conversation } from './components/conversation/conversation';
-import { ConversationList } from './components/conversation/conversation-list/conversation-list';
-import { ConversationRegister } from './components/conversation/conversation-register/conversation-register';
-import { ConversationUpdate } from './components/conversation/conversation-update/conversation-update';
-import { Message } from './components/message/message';
-import { MessageList } from './components/message/message-list/message-list';
-import { MessageRegister } from './components/message/message-register/message-register';
-import { MessageUpdate } from './components/message/message-update/message-update';
 import { Notification } from './components/notification/notification';
 import { NotificationList } from './components/notification/notification-list/notification-list';
 import { NotificationRegister } from './components/notification/notification-register/notification-register';
@@ -95,39 +83,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'favorites',
-    component: Favorite,
-    children: [
-      { path: 'list', component: FavoriteList },
-      { path: 'register', component: FavoriteRegister },
-      { path: 'edit/:id', component: FavoriteUpdate },
-    ],
-  },
-  {
     path: 'contracts',
     component: Contract,
     children: [
       { path: 'list', component: ContractList },
       { path: 'register', component: ContractRegister },
       { path: 'edit/:id', component: ContractUpdate },
-    ],
-  },
-  {
-    path: 'conversations',
-    component: Conversation,
-    children: [
-      { path: 'list', component: ConversationList },
-      { path: 'register', component: ConversationRegister },
-      { path: 'edit/:id', component: ConversationUpdate },
-    ],
-  },
-  {
-    path: 'messages',
-    component: Message,
-    children: [
-      { path: 'list', component: MessageList },
-      { path: 'register', component: MessageRegister },
-      { path: 'edit/:id', component: MessageUpdate },
     ],
   },
   {
