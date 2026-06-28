@@ -20,10 +20,10 @@ import { Contract } from './components/contract/contract';
 import { ContractList } from './components/contract/contract-list/contract-list';
 import { ContractRegister } from './components/contract/contract-register/contract-register';
 import { ContractUpdate } from './components/contract/contract-update/contract-update';
-import { Notification } from './components/notification/notification';
-import { NotificationList } from './components/notification/notification-list/notification-list';
-import { NotificationRegister } from './components/notification/notification-register/notification-register';
-import { NotificationUpdate } from './components/notification/notification-update/notification-update';
+import { Favorite } from './components/favorite/favorite';
+import { FavoriteList } from './components/favorite/favorite-list/favorite-list';
+import { FavoriteRegister } from './components/favorite/favorite-register/favorite-register';
+import { FavoriteUpdate } from './components/favorite/favorite-update/favorite-update';
 import { Review } from './components/review/review';
 import { ReviewList } from './components/review/review-list/review-list';
 import { ReviewRegister } from './components/review/review-register/review-register';
@@ -32,10 +32,6 @@ import { RiskReport } from './components/risk-report/risk-report';
 import { RiskReportList } from './components/risk-report/risk-report-list/risk-report-list';
 import { RiskReportRegister } from './components/risk-report/risk-report-register/risk-report-register';
 import { RiskReportUpdate } from './components/risk-report/risk-report-update/risk-report-update';
-import { RiskPoint } from './components/risk-point/risk-point';
-import { RiskPointList } from './components/risk-point/risk-point-list/risk-point-list';
-import { RiskPointRegister } from './components/risk-point/risk-point-register/risk-point-register';
-import { RiskPointUpdate } from './components/risk-point/risk-point-update/risk-point-update';
 import { Model3d } from './components/model3d/model3d';
 import { Model3dList } from './components/model3d/model3d-list/model3d-list';
 import { Model3dRegister } from './components/model3d/model3d-register/model3d-register';
@@ -92,12 +88,12 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'notifications',
-    component: Notification,
+    path: 'favorites',
+    component: Favorite,
     children: [
-      { path: 'list', component: NotificationList },
-      { path: 'register', component: NotificationRegister },
-      { path: 'edit/:id', component: NotificationUpdate },
+      { path: 'list', component: FavoriteList },
+      { path: 'register', component: FavoriteRegister },
+      { path: 'edit/:id', component: FavoriteUpdate },
     ],
   },
   {
@@ -119,15 +115,6 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'risk-points',
-    component: RiskPoint,
-    children: [
-      { path: 'list', component: RiskPointList },
-      { path: 'register', component: RiskPointRegister },
-      { path: 'edit/:id', component: RiskPointUpdate },
-    ],
-  },
-  {
     path: 'models3d',
     component: Model3d,
     children: [
@@ -135,5 +122,12 @@ export const routes: Routes = [
       { path: 'register', component: Model3dRegister },
       { path: 'edit/:id', component: Model3dUpdate },
     ],
+  },
+  {
+    path: 'model3d-ar-demo',
+    loadComponent: () =>
+      import('./experimental/model3d-ar-demo/model3d-ar-demo').then(
+        (component) => component.Model3dArDemo,
+      ),
   },
 ];

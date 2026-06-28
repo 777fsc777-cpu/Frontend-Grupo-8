@@ -30,11 +30,10 @@ export class App {
     { label: 'Roles', route: '/roles/list', icon: 'admin_panel_settings' },
     { label: 'Antecedentes', route: '/backgrounds/list', icon: 'badge' },
     { label: 'Inmuebles', route: '/estates/list', icon: 'apartment' },
+    { label: 'Favoritos', route: '/favorites/list', icon: 'favorite' },
     { label: 'Contratos', route: '/contracts/list', icon: 'description' },
-    { label: 'Notificaciones', route: '/notifications/list', icon: 'notifications' },
     { label: 'Resenas', route: '/reviews/list', icon: 'star' },
     { label: 'Reportes', route: '/risk-reports/list', icon: 'report' },
-    { label: 'Puntos de riesgo', route: '/risk-points/list', icon: 'location_on' },
     { label: 'Modelos 3D', route: '/models3d/list', icon: 'view_in_ar' },
   ];
 }
