@@ -129,11 +129,4 @@ export const routes: Routes = [
       { path: 'edit/:id', component: Model3dUpdate },
     ],
   },
-  {
-    path: 'model3d-ar-demo',
-    loadComponent: () =>
-      import('./experimental/model3d-ar-demo/model3d-ar-demo').then(
-        (component) => component.Model3dArDemo,
-      ),
-  },
 ];
