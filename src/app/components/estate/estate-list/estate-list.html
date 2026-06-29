@@ -4,10 +4,17 @@
       <p>Inmuebles</p>
       <h1>Lista de inmuebles</h1>
     </div>
-    <button mat-flat-button color="primary" routerLink="/estates/register">
-      <mat-icon>add</mat-icon>
-      Registrar inmueble
-    </button>
+    <div class="header-actions">
+      <!-- Acceso independiente a la vista que geocodifica los inmuebles. -->
+      <button mat-stroked-button routerLink="/estates/map">
+        <mat-icon>map</mat-icon>
+        Ver mapa
+      </button>
+      <button mat-flat-button color="primary" routerLink="/estates/register">
+        <mat-icon>add</mat-icon>
+        Registrar inmueble
+      </button>
+    </div>
   </header>
 
   <div class="entity-grid">

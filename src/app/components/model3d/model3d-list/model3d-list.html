@@ -11,6 +11,7 @@
   </header>
 
   <div class="entity-grid">
+    <!-- Cada tarjeta representa un registro Model3D recuperado desde Spring Boot. -->
     @for (element of dataSource.connect() | async; track element.idModels3D) {
       <mat-card class="entity-card">
         <mat-card-header>
@@ -27,11 +28,25 @@
           </dl>
         </mat-card-content>
 
+        <!-- Ver abre model-viewer; editar y eliminar mantienen el CRUD existente. -->
         <mat-card-actions align="end">
+          <button
+            mat-icon-button
+            [routerLink]="['/models3d/view', element.idModels3D]"
+            aria-label="Visualizar modelo"
+          >
+            <mat-icon>visibility</mat-icon>
+          </button>
           <button mat-icon-button color="primary" [routerLink]="['/models3d/edit', element.idModels3D]" aria-label="Editar modelo">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-icon-button color="warn" (click)="eliminar(element.idModels3D)" aria-label="Eliminar modelo">
+          <button
+            mat-icon-button
+            color="warn"
+            [disabled]="deletingId === element.idModels3D"
+            (click)="eliminar(element)"
+            aria-label="Eliminar modelo"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </mat-card-actions>
@@ -44,5 +59,6 @@
     }
   </div>
 
+  <!-- El paginador controla cuantos modelos se muestran en la cuadricula. -->
   <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de modelos"></mat-paginator>
 </section>

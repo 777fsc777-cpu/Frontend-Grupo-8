@@ -14,6 +14,7 @@ import { BackgroundRegister } from './components/background/background-register/
 import { BackgroundUpdate } from './components/background/background-update/background-update';
 import { Estate } from './components/estate/estate';
 import { EstateList } from './components/estate/estate-list/estate-list';
+import { EstateMap } from './components/estate/estate-map/estate-map';
 import { EstateRegister } from './components/estate/estate-register/estate-register';
 import { EstateUpdate } from './components/estate/estate-update/estate-update';
 import { Contract } from './components/contract/contract';
@@ -36,6 +37,7 @@ import { Model3d } from './components/model3d/model3d';
 import { Model3dList } from './components/model3d/model3d-list/model3d-list';
 import { Model3dRegister } from './components/model3d/model3d-register/model3d-register';
 import { Model3dUpdate } from './components/model3d/model3d-update/model3d-update';
+import { Model3dView } from './components/model3d/model3d-view/model3d-view';
 
 export const routes: Routes = [
   {
@@ -74,6 +76,8 @@ export const routes: Routes = [
     component: Estate,
     children: [
       { path: 'list', component: EstateList },
+      // Vista geografica de los inmuebles registrados.
+      { path: 'map', component: EstateMap },
       { path: 'register', component: EstateRegister },
       { path: 'edit/:id', component: EstateUpdate },
     ],
@@ -119,15 +123,10 @@ export const routes: Routes = [
     component: Model3d,
     children: [
       { path: 'list', component: Model3dList },
+      // El ID permite recuperar la URL del GLB que mostrara model-viewer.
+      { path: 'view/:id', component: Model3dView },
       { path: 'register', component: Model3dRegister },
       { path: 'edit/:id', component: Model3dUpdate },
     ],
-  },
-  {
-    path: 'model3d-ar-demo',
-    loadComponent: () =>
-      import('./experimental/model3d-ar-demo/model3d-ar-demo').then(
-        (component) => component.Model3dArDemo,
-      ),
   },
 ];

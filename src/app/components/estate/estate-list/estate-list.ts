@@ -45,9 +45,22 @@ export class EstateList implements OnInit, AfterViewInit {
   }
 
   eliminar(id: number) {
-    this.eS.delete(id).subscribe(() => {
-      this.snackBar.open('Inmueble eliminado correctamente', 'Cerrar', { duration: 3000 });
-      this.cargarInmuebles();
+    if (!window.confirm(`¿Eliminar el inmueble #${id}?`)) {
+      return;
+    }
+
+    this.eS.delete(id).subscribe({
+      next: () => {
+        this.snackBar.open('Inmueble eliminado correctamente', 'Cerrar', { duration: 3000 });
+        this.cargarInmuebles();
+      },
+      error: (error) => {
+        const message =
+          typeof error?.error === 'string' && error.error.trim()
+            ? error.error
+            : 'No se pudo eliminar el inmueble.';
+        this.snackBar.open(message, 'Cerrar', { duration: 4500 });
+      },
     });
   }
 }
