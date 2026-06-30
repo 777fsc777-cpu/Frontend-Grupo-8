@@ -26,6 +26,16 @@
     <input matInput type="password" name="password" [(ngModel)]="user.password" required />
   </mat-form-field>
 
+  <!-- El usuario puede elegir unicamente uno de los dos roles publicos. -->
+  <mat-form-field appearance="outline">
+    <mat-label>Tipo de usuario</mat-label>
+    <mat-select name="role" [(ngModel)]="user.role" required>
+      @for (role of rolesDisponibles; track role) {
+        <mat-option [value]="role">{{ role }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
   <mat-form-field appearance="outline">
     <mat-label>Foto de perfil</mat-label>
     <input matInput name="profilePhoto" [(ngModel)]="user.profilePhoto" required />
@@ -34,42 +44,6 @@
   <mat-form-field appearance="outline">
     <mat-label>Teléfono</mat-label>
     <input matInput name="phoneNumber" [(ngModel)]="user.phoneNumber" required />
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Fecha de creación</mat-label>
-    <input matInput type="date" name="createdDate" [(ngModel)]="user.createdDate" required />
-    <div class="date-error-container">
-      @if (user.createdDate && user.updateDate && user.createdDate > user.updateDate) {
-        <mat-error> La fecha de creación no puede ser posterior a la fecha de actualización </mat-error>
-      }
-    </div>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Fecha de actualización</mat-label>
-    <input matInput type="date" name="updateDate" [(ngModel)]="user.updateDate" required />
-    <div class="date-error-container">
-      @if (user.createdDate && user.updateDate && user.createdDate > user.updateDate) {
-        <mat-error> La fecha de actualización no puede ser anterior a la fecha de creación </mat-error>
-      }
-    </div>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Verificado</mat-label>
-    <mat-select name="statusVerification" [(ngModel)]="user.statusVerification" required>
-      <mat-option [value]="true">Sí</mat-option>
-      <mat-option [value]="false">No</mat-option>
-    </mat-select>
-  </mat-form-field>
-
-  <mat-form-field appearance="outline">
-    <mat-label>Habilitado</mat-label>
-    <mat-select name="enabled" [(ngModel)]="user.enabled" required>
-      <mat-option [value]="true">Sí</mat-option>
-      <mat-option [value]="false">No</mat-option>
-    </mat-select>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="userForm.invalid">

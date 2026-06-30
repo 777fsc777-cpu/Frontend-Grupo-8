@@ -26,6 +26,7 @@ import { Userservice } from '../../../services/userservice';
 })
 export class UserRegister {
   user: User = new User();
+  rolesDisponibles: string[] = ['ARRENDADOR', 'ARRENDATARIO'];
 
   constructor(
     private uS: Userservice,
@@ -36,16 +37,28 @@ export class UserRegister {
     const formattedDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
     this.user.createdDate = formattedDate;
     this.user.updateDate = formattedDate;
+    this.user.statusVerification = false;
+    this.user.enabled = true;
   }
 
   aceptar() {
-    this.uS.insert(this.user).subscribe(() => {
-      this.snackBar.open('Usuario registrado correctamente', 'Cerrar', { duration: 3000 });
-      this.router.navigate(['/users/list']);
+    // El backend valida el rol y crea tanto el usuario como su rol.
+    this.uS.insert(this.user).subscribe({
+      next: () => {
+        this.snackBar.open('Usuario registrado correctamente', 'Cerrar', { duration: 3000 });
+        this.router.navigate(['/']);
+      },
+      error: (error) => {
+        this.snackBar.open(
+          error.error || 'No se pudo registrar el usuario',
+          'Cerrar',
+          { duration: 3000 }
+        );
+      },
     });
   }
 
   cancelar() {
-    this.router.navigate(['/users/list']);
+    this.router.navigate(['/']);
   }
 }

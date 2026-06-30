@@ -45,6 +45,10 @@ export const routes: Routes = [
     component: MenuComponent,
   },
   {
+    path: 'register',
+    component: UserRegister,
+  },
+  {
     path: 'users',
     component: User,
     children: [
