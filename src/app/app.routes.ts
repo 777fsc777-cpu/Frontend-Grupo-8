@@ -39,6 +39,8 @@ import { Model3dRegister } from './components/model3d/model3d-register/model3d-r
 import { Model3dUpdate } from './components/model3d/model3d-update/model3d-update';
 import { Model3dView } from './components/model3d/model3d-view/model3d-view';
 import { Contractexpiringsoon } from './components/contract/contractexpiringsoon/contractexpiringsoon';
+import { ContractRevenueByDistrict } from './components/contract/contract-revenue-by-district/contract-revenue-by-district';
+import { ContractAverageDurationByLessor } from './components/contract/contract-average-duration-lessor/contract-average-duration-lessor';
 
 export const routes: Routes = [
   {
@@ -95,6 +97,9 @@ export const routes: Routes = [
       { path: 'register', component: ContractRegister },
       { path: 'edit/:id', component: ContractUpdate },
       { path: 'contract-expiring-soon', component: Contractexpiringsoon },
+      
+      { path: 'contract-revenue-by-district', component: ContractRevenueByDistrict },
+      { path: 'contract-average-duration-by-lessor', component: ContractAverageDurationByLessor },
     ],
   },
   {
