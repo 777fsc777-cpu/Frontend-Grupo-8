@@ -1,0 +1,30 @@
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Contratos</p>
+      <h1>Ingresos por distrito</h1>
+    </div>
+  </header>
+
+  <div class="entity-grid">
+    @for (element of distritos; track element.district) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>location_city</mat-icon>
+          <mat-card-title>{{ element.district }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <dl>
+            <div><dt>Ingreso total</dt><dd>{{ element.totalRevenue | currency }}</dd></div>
+          </dl>
+        </mat-card-content>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay datos de ingresos por distrito.</span>
+      </mat-card>
+    }
+  </div>
+</section>
