@@ -4,10 +4,17 @@
       <p>Contratos</p>
       <h1>Lista de contratos</h1>
     </div>
-    <button mat-flat-button color="primary" routerLink="/contracts/register">
-      <mat-icon>add</mat-icon>
-      Registrar contrato
-    </button>
+
+    <div class="header-actions">
+      <button mat-stroked-button color="primary" routerLink="/contracts/contract-expiring-soon">
+        <mat-icon>event_busy</mat-icon>
+        Contratos por vencer
+      </button>
+      <button mat-flat-button color="primary" routerLink="/contracts/register">
+        <mat-icon>add</mat-icon>
+        Registrar contrato
+      </button>
+    </div>
   </header>
 
   <div class="entity-grid">
@@ -46,5 +53,5 @@
     }
   </div>
 
-  <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de contratos"></mat-paginator>
+  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de contratos"></mat-paginator>
 </section>
