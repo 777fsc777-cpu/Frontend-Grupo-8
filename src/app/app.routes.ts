@@ -38,11 +38,18 @@ import { Model3dList } from './components/model3d/model3d-list/model3d-list';
 import { Model3dRegister } from './components/model3d/model3d-register/model3d-register';
 import { Model3dUpdate } from './components/model3d/model3d-update/model3d-update';
 import { Model3dView } from './components/model3d/model3d-view/model3d-view';
+import { Authenticate } from './components/authenticate/authenticate';
+import { seguridadGuard } from './guard/seguridad-guard';
 
 export const routes: Routes = [
   {
+    path: 'login',
+    component: Authenticate,
+  },
+  {
     path: '',
     component: MenuComponent,
+    canActivate: [seguridadGuard],
   },
   {
     path: 'register',
@@ -51,6 +58,8 @@ export const routes: Routes = [
   {
     path: 'users',
     component: User,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: ComponentList },
       { path: 'register', component: UserRegister },
@@ -60,6 +69,8 @@ export const routes: Routes = [
   {
     path: 'roles',
     component: Role,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: RoleList },
       { path: 'register', component: RoleRegister },
@@ -69,6 +80,8 @@ export const routes: Routes = [
   {
     path: 'backgrounds',
     component: Background,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: BackgroundList },
       { path: 'register', component: BackgroundRegister },
@@ -78,6 +91,8 @@ export const routes: Routes = [
   {
     path: 'estates',
     component: Estate,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: EstateList },
       // Vista geografica de los inmuebles registrados.
@@ -89,6 +104,8 @@ export const routes: Routes = [
   {
     path: 'contracts',
     component: Contract,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: ContractList },
       { path: 'register', component: ContractRegister },
@@ -98,6 +115,8 @@ export const routes: Routes = [
   {
     path: 'favorites',
     component: Favorite,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: FavoriteList },
       { path: 'register', component: FavoriteRegister },
@@ -107,6 +126,8 @@ export const routes: Routes = [
   {
     path: 'reviews',
     component: Review,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: ReviewList },
       { path: 'register', component: ReviewRegister },
@@ -116,6 +137,8 @@ export const routes: Routes = [
   {
     path: 'risk-reports',
     component: RiskReport,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: RiskReportList },
       { path: 'register', component: RiskReportRegister },
@@ -125,6 +148,8 @@ export const routes: Routes = [
   {
     path: 'models3d',
     component: Model3d,
+    canActivate: [seguridadGuard],
+    canActivateChild: [seguridadGuard],
     children: [
       { path: 'list', component: Model3dList },
       // El ID permite recuperar la URL del GLB que mostrara model-viewer.

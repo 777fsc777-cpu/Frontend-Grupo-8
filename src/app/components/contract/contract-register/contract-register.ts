@@ -42,6 +42,25 @@ export class ContractRegister {
   }
 
   aceptar() {
+    const start = this.contract.startDate instanceof Date
+      ? this.contract.startDate
+      : new Date(this.contract.startDate);
+    const end = this.contract.endDate instanceof Date
+      ? this.contract.endDate
+      : new Date(this.contract.endDate);
+
+    if (end <= start) {
+      this.snackBar.open('La fecha de fin debe ser posterior a la fecha de inicio.', 'Cerrar', { duration: 3500 });
+      return;
+    }
+    if (this.contract.idLessor === this.contract.idLessee) {
+      this.snackBar.open('El arrendador y el arrendatario deben ser diferentes.', 'Cerrar', { duration: 3500 });
+      return;
+    }
+
+    this.contract.startDate = this.formatearFechaHora(this.contract.startDate);
+    this.contract.endDate = this.formatearFechaHora(this.contract.endDate, true);
+    this.contract.createdAt = this.formatearFechaHora(this.contract.createdAt);
     this.cS.insert(this.contract).subscribe(() => {
       this.snackBar.open('Contrato registrado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/contracts/list']);
@@ -50,5 +69,18 @@ export class ContractRegister {
 
   cancelar() {
     this.router.navigate(['/contracts/list']);
+  }
+
+  formatearFechaHora(fecha: Date | string, finDelDia = false): string {
+    if (typeof fecha === 'string') {
+      if (fecha.includes('T')) {
+        return fecha.length === 16 ? `${fecha}:00` : fecha.substring(0, 19);
+      }
+      return `${fecha}T${finDelDia ? '23:59:59' : '00:00:00'}`;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}T${finDelDia ? '23:59:59' : '00:00:00'}`;
   }
 }

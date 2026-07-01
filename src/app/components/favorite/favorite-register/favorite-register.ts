@@ -13,6 +13,7 @@ import { User } from '../../../models/User';
 import { Estateservice } from '../../../services/estateservice';
 import { Favoriteservice } from '../../../services/favoriteservice';
 import { Userservice } from '../../../services/userservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-favorite-register',
@@ -24,6 +25,7 @@ import { Userservice } from '../../../services/userservice';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './favorite-register.html',
   styleUrl: './favorite-register.css',
@@ -32,6 +34,7 @@ export class FavoriteRegister implements OnInit {
   favorite: Favorite = new Favorite();
   users: User[] = [];
   estates: Estate[] = [];
+  today: Date = new Date();
 
   constructor(
     private favoriteService: Favoriteservice,
@@ -40,8 +43,7 @@ export class FavoriteRegister implements OnInit {
     private router: Router,
     private snackBar: MatSnackBar,
   ) {
-    const date = new Date();
-    this.favorite.creationDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+    this.favorite.creationDate = new Date();
   }
 
   ngOnInit(): void {
@@ -50,6 +52,7 @@ export class FavoriteRegister implements OnInit {
   }
 
   save(): void {
+    this.favorite.creationDate = this.formatearFecha(this.favorite.creationDate);
     this.favoriteService.insert(this.favorite).subscribe(() => {
       this.snackBar.open('Favorito registrado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/favorites/list']);
@@ -58,5 +61,15 @@ export class FavoriteRegister implements OnInit {
 
   cancel(): void {
     this.router.navigate(['/favorites/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { RiskReport } from '../../../models/RiskReport';
+import { LoginService } from '../../../services/login-service';
 import { Riskreportservice } from '../../../services/riskreportservice';
 
 @Component({
@@ -24,7 +25,8 @@ export class RiskReportList implements OnInit, AfterViewInit {
 
   constructor(
     private rS: Riskreportservice,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {}
 
   ngOnInit(): void {}
@@ -34,14 +36,27 @@ export class RiskReportList implements OnInit, AfterViewInit {
     this.cargarReportes();
   }
 
+  /** Selecciona el endpoint segun el rol, igual que en el listado de inmuebles. */
   cargarReportes() {
-    this.rS.list().subscribe((data) => {
+    const consulta = this.isArrendador() && !this.isAdmin()
+      ? this.rS.listMine()
+      : this.rS.list();
+
+    consulta.subscribe((data) => {
       this.dataSource.data = data;
       if (this.paginator) {
         this.dataSource.paginator = this.paginator;
         this.paginator.firstPage();
       }
     });
+  }
+
+  isArrendador(): boolean {
+    return this.loginService.tieneRol('ARRENDADOR');
+  }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
   }
 
   eliminar(id: number) {

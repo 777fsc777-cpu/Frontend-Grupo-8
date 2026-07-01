@@ -13,6 +13,7 @@ import { User } from '../../../models/User';
 import { Estateservice } from '../../../services/estateservice';
 import { Favoriteservice } from '../../../services/favoriteservice';
 import { Userservice } from '../../../services/userservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-favorite-update',
@@ -24,6 +25,7 @@ import { Userservice } from '../../../services/userservice';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './favorite-update.html',
   styleUrl: './favorite-update.css',
@@ -33,6 +35,7 @@ export class FavoriteUpdate implements OnInit {
   users: User[] = [];
   estates: Estate[] = [];
   id: number = 0;
+  today: Date = new Date();
 
   constructor(
     private favoriteService: Favoriteservice,
@@ -51,10 +54,12 @@ export class FavoriteUpdate implements OnInit {
       this.favorite = data;
       this.favorite.idUser = data.user?.idUser ?? data.idUser;
       this.favorite.idEstate = data.estate?.idEstate ?? data.idEstate;
+      this.favorite.creationDate = new Date(`${data.creationDate}T00:00:00`);
     });
   }
 
   save(): void {
+    this.favorite.creationDate = this.formatearFecha(this.favorite.creationDate);
     this.favoriteService.update(this.favorite).subscribe(() => {
       this.snackBar.open('Favorito actualizado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/favorites/list']);
@@ -63,5 +68,15 @@ export class FavoriteUpdate implements OnInit {
 
   cancel(): void {
     this.router.navigate(['/favorites/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

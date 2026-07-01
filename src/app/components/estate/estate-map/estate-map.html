@@ -2,7 +2,13 @@
   <header class="map-header">
     <div>
       <p>Google Maps API</p>
-      <h1>Ubicación de inmuebles</h1>
+      @if (isAdmin()) {
+        <h1>Ubicación de todos los inmuebles</h1>
+      } @else if (isArrendador()) {
+        <h1>Ubicación de mis inmuebles</h1>
+      } @else {
+        <h1>Ubicación de inmuebles</h1>
+      }
     </div>
     <button mat-stroked-button routerLink="/estates/list">
       <mat-icon>arrow_back</mat-icon>

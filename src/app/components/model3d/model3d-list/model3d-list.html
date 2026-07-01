@@ -2,12 +2,14 @@
   <header class="list-header">
     <div>
       <p>Modelos 3D</p>
-      <h1>Lista de modelos 3D</h1>
+      <h1>{{ isArrendador() && !isAdmin() ? 'Mis modelos 3D' : 'Lista de modelos 3D' }}</h1>
     </div>
-    <button mat-flat-button color="primary" routerLink="/models3d/register">
-      <mat-icon>add</mat-icon>
-      Registrar modelo 3D
-    </button>
+    @if (isArrendador()) {
+      <button mat-flat-button color="primary" routerLink="/models3d/register">
+        <mat-icon>add</mat-icon>
+        Registrar modelo 3D
+      </button>
+    }
   </header>
 
   <div class="entity-grid">
@@ -37,18 +39,20 @@
           >
             <mat-icon>visibility</mat-icon>
           </button>
-          <button mat-icon-button color="primary" [routerLink]="['/models3d/edit', element.idModels3D]" aria-label="Editar modelo">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button
-            mat-icon-button
-            color="warn"
-            [disabled]="deletingId === element.idModels3D"
-            (click)="eliminar(element)"
-            aria-label="Eliminar modelo"
-          >
-            <mat-icon>delete</mat-icon>
-          </button>
+          @if (isAdmin() || isArrendador()) {
+            <button mat-icon-button color="primary" [routerLink]="['/models3d/edit', element.idModels3D]" aria-label="Editar modelo">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="warn"
+              [disabled]="deletingId === element.idModels3D"
+              (click)="eliminar(element)"
+              aria-label="Eliminar modelo"
+            >
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
         </mat-card-actions>
       </mat-card>
     } @empty {
@@ -60,5 +64,5 @@
   </div>
 
   <!-- El paginador controla cuantos modelos se muestran en la cuadricula. -->
-  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de modelos"></mat-paginator>
+  <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de modelos"></mat-paginator>
 </section>

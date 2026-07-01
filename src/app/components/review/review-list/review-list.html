@@ -2,12 +2,14 @@
   <header class="list-header">
     <div>
       <p>Resenas</p>
-      <h1>Lista de resenas</h1>
+      <h1>{{ isArrendador() && !isAdmin() ? 'Resenas de mis inmuebles' : 'Lista de resenas' }}</h1>
     </div>
-    <button mat-flat-button color="primary" routerLink="/reviews/register">
-      <mat-icon>add</mat-icon>
-      Registrar resena
-    </button>
+    @if (isAdmin() || !isArrendador()) {
+      <button mat-flat-button color="primary" routerLink="/reviews/register">
+        <mat-icon>add</mat-icon>
+        Registrar resena
+      </button>
+    }
   </header>
 
   <div class="entity-grid">
@@ -29,12 +31,14 @@
         </mat-card-content>
 
         <mat-card-actions align="end">
-          <button mat-icon-button color="primary" [routerLink]="['/reviews/edit', element.idReview]" aria-label="Editar resena">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="eliminar(element.idReview)" aria-label="Eliminar resena">
-            <mat-icon>delete</mat-icon>
-          </button>
+          @if (isAdmin()) {
+            <button mat-icon-button color="primary" [routerLink]="['/reviews/edit', element.idReview]" aria-label="Editar resena">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminar(element.idReview)" aria-label="Eliminar resena">
+              <mat-icon>delete</mat-icon>
+            </button>
+          }
         </mat-card-actions>
       </mat-card>
     } @empty {
@@ -45,5 +49,5 @@
     }
   </div>
 
-  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de resenas"></mat-paginator>
+  <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de resenas"></mat-paginator>
 </section>

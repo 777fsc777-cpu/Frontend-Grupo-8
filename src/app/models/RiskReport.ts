@@ -1,7 +1,7 @@
 export class RiskReport {
   idRiskReport: number = 0;
   type: string = '';
-  creationDate: string = '';
+  creationDate: Date | string = '';
   riskLevel: string = '';
   description: string = '';
   details: string = '';

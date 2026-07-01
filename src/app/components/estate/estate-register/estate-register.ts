@@ -9,6 +9,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Estate } from '../../../models/Estate';
 import { Estateservice } from '../../../services/estateservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-estate-register',
@@ -20,23 +21,25 @@ import { Estateservice } from '../../../services/estateservice';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './estate-register.html',
   styleUrl: './estate-register.css',
 })
 export class EstateRegister {
   estate: Estate = new Estate();
+  today: Date = new Date();
 
   constructor(
     private eS: Estateservice,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    const d = new Date();
-    this.estate.creationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    this.estate.creationDate = new Date();
   }
 
   aceptar() {
+    this.estate.creationDate = this.formatearFecha(this.estate.creationDate);
     this.eS.insert(this.estate).subscribe(() => {
       this.snackBar.open('Inmueble registrado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/estates/list']);
@@ -45,5 +48,15 @@ export class EstateRegister {
 
   cancelar() {
     this.router.navigate(['/estates/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

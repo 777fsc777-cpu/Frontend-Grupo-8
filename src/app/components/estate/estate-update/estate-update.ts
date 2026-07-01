@@ -9,6 +9,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Estate } from '../../../models/Estate';
 import { Estateservice } from '../../../services/estateservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-estate-update',
@@ -20,6 +21,7 @@ import { Estateservice } from '../../../services/estateservice';
     MatButtonModule,
     MatIconModule,
     MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './estate-update.html',
   styleUrl: './estate-update.css',
@@ -27,6 +29,7 @@ import { Estateservice } from '../../../services/estateservice';
 export class EstateUpdate implements OnInit {
   estate: Estate = new Estate();
   id: number = 0;
+  today: Date = new Date();
 
   constructor(
     private eS: Estateservice,
@@ -40,10 +43,12 @@ export class EstateUpdate implements OnInit {
     this.eS.listId(this.id).subscribe((data) => {
       this.estate = data;
       this.estate.idUser = data.user?.idUser ?? data.idUser;
+      this.estate.creationDate = new Date(`${data.creationDate}T00:00:00`);
     });
   }
 
   aceptar() {
+    this.estate.creationDate = this.formatearFecha(this.estate.creationDate);
     this.eS.update(this.estate).subscribe(() => {
       this.snackBar.open('Inmueble actualizado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/estates/list']);
@@ -52,5 +57,15 @@ export class EstateUpdate implements OnInit {
 
   cancelar() {
     this.router.navigate(['/estates/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

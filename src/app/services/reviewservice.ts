@@ -15,6 +15,10 @@ export class Reviewservice {
     return this.http.get<Review[]>(this.url);
   }
 
+  listMine() {
+    return this.http.get<Review[]>(`${this.url}/my-reviews`);
+  }
+
   insert(review: Review) {
     return this.http.post(this.url, review, { responseType: 'text' });
   }

@@ -15,6 +15,7 @@ import { firstValueFrom } from 'rxjs';
 import { Estate } from '../../../models/Estate';
 import { Estateservice } from '../../../services/estateservice';
 import { GoogleMapsService } from '../../../services/google-maps.service';
+import { LoginService } from '../../../services/login-service';
 
 @Component({
   selector: 'app-estate-map',
@@ -35,6 +36,7 @@ export class EstateMap implements AfterViewInit {
   constructor(
     private estateService: Estateservice,
     private googleMapsService: GoogleMapsService,
+    private loginService: LoginService,
     @Inject(PLATFORM_ID) platformId: object,
   ) {
     this.isBrowser = isPlatformBrowser(platformId);
@@ -50,7 +52,14 @@ export class EstateMap implements AfterViewInit {
   /** Lista inmuebles, geocodifica sus direcciones y crea un marcador por resultado. */
   private async loadMap(): Promise<void> {
     try {
-      const estates = await firstValueFrom(this.estateService.list());
+      let estates: Estate[];
+
+      if (this.isArrendador() && !this.isAdmin()) {
+        estates = await firstValueFrom(this.estateService.listMine());
+      } else {
+        estates = await firstValueFrom(this.estateService.list());
+      }
+
       const google = await this.googleMapsService.load();
       this.totalEstates = estates.length;
 
@@ -117,6 +126,14 @@ export class EstateMap implements AfterViewInit {
     } finally {
       this.loading = false;
     }
+  }
+
+  isArrendador(): boolean {
+    return this.loginService.tieneRol('ARRENDADOR');
+  }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
   }
 
   /** Forma la direccion que Google intentara localizar. */

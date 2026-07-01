@@ -15,6 +15,10 @@ export class Model3dservice {
     return this.http.get<Model3d[]>(`${this.url}/ListModels3D`);
   }
 
+  listMine() {
+    return this.http.get<Model3d[]>(`${this.url}/my-models`);
+  }
+
   insert(model3d: Model3d) {
     return this.http.post(`${this.url}/Register`, model3d, { responseType: 'text' });
   }
