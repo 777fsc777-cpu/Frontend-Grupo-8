@@ -11,7 +11,10 @@ export class Estate {
   rooms: number = 0;
   bathrooms: number = 0;
   areaM2: number = 0;
-  creationDate: string = '';
+  creationDate: Date | string = '';
   idUser: any = 0;
   user?: { idUser: number };
+  ownerName: string = '';
+  ownerLastName: string = '';
+  ownerPhoneNumber: string = '';
 }

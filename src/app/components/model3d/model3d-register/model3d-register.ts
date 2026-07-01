@@ -13,7 +13,9 @@ import { Estate } from '../../../models/Estate';
 import { Model3d } from '../../../models/Model3d';
 import { Estateservice } from '../../../services/estateservice';
 import { FirebaseStorageService } from '../../../services/firebase-storage.service';
+import { LoginService } from '../../../services/login-service';
 import { Model3dservice } from '../../../services/model3dservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-model3d-register',
@@ -26,6 +28,7 @@ import { Model3dservice } from '../../../services/model3dservice';
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './model3d-register.html',
   styleUrl: './model3d-register.css',
@@ -36,6 +39,7 @@ export class Model3dRegister implements OnInit {
   selectedFile: File | null = null;
   selectedFileName = 'Ningún archivo seleccionado';
   saving = false;
+  today: Date = new Date();
 
   constructor(
     private mS: Model3dservice,
@@ -43,16 +47,20 @@ export class Model3dRegister implements OnInit {
     private storageService: FirebaseStorageService,
     private router: Router,
     private snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {
     // El registro comienza con la fecha local y un estado inicial valido.
-    const d = new Date();
-    this.model3d.createDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    this.model3d.createDate = new Date();
     this.model3d.state = 'ACTIVO';
   }
 
   /** Carga los inmuebles que se muestran en el selector de clave foranea. */
   ngOnInit(): void {
-    this.eS.list().subscribe((data) => (this.estates = data));
+    if (this.loginService.tieneRol('ARRENDADOR') && !this.loginService.tieneRol('ADMIN')) {
+      this.eS.listMine().subscribe((data) => (this.estates = data));
+    } else {
+      this.eS.list().subscribe((data) => (this.estates = data));
+    }
   }
 
   /** Recibe el archivo del input y lo conserva solo si pasa las validaciones. */
@@ -89,6 +97,7 @@ export class Model3dRegister implements OnInit {
     try {
       uploadedUrl = await this.storageService.uploadGlb(this.selectedFile);
       this.model3d.fileURL = uploadedUrl;
+      this.model3d.createDate = this.formatearFecha(this.model3d.createDate);
       await firstValueFrom(this.mS.insert(this.model3d));
       this.snackBar.open('Modelo 3D registrado correctamente', 'Cerrar', { duration: 3000 });
       await this.router.navigate(['/models3d/list']);
@@ -113,5 +122,15 @@ export class Model3dRegister implements OnInit {
   /** Prioriza el mensaje enviado por Spring Boot y usa uno general como respaldo. */
   private errorText(error: any, fallback: string): string {
     return typeof error?.error === 'string' && error.error.trim() ? error.error : fallback;
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

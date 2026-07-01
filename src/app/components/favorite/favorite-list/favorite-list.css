@@ -87,10 +87,15 @@
 
 .empty-card {
   min-height: 160px;
-  display: grid;
-  place-items: center;
+  grid-column: 1 / -1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 8px;
   color: #6a7b8d;
+  text-align: center;
 }
 
 .empty-card mat-icon {

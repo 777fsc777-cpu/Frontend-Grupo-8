@@ -8,26 +8,28 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Review } from '../../../models/Review';
 import { Reviewservice } from '../../../services/reviewservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-review-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatDatepickerModule],
   templateUrl: './review-register.html',
   styleUrl: './review-register.css',
 })
 export class ReviewRegister {
   review: Review = new Review();
+  today: Date = new Date();
 
   constructor(
     private rS: Reviewservice,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    const d = new Date();
-    this.review.creationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    this.review.creationDate = new Date();
   }
 
   aceptar() {
+    this.review.creationDate = this.formatearFecha(this.review.creationDate);
     this.rS.insert(this.review).subscribe(() => {
       this.snackBar.open('Reseña registrada correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/reviews/list']);
@@ -36,5 +38,15 @@ export class ReviewRegister {
 
   cancelar() {
     this.router.navigate(['/reviews/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

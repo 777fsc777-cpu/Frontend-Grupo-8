@@ -1,19 +1,27 @@
 <section class="card-list-page">
   <header class="list-header">
     <div>
-      <p>Inmuebles</p>
-      <h1>Lista de inmuebles</h1>
+      <p>Gestión de inmuebles</p>
+      @if (isAdmin()) {
+        <h1>Todos los inmuebles</h1>
+      } @else if (isArrendador()) {
+        <h1>Mis inmuebles</h1>
+      } @else {
+        <h1>Inmuebles disponibles</h1>
+      }
     </div>
     <div class="header-actions">
-      <!-- Acceso independiente a la vista que geocodifica los inmuebles. -->
+      <!-- El mapa selecciona listMine o listAll segun el rol autenticado. -->
       <button mat-stroked-button routerLink="/estates/map">
         <mat-icon>map</mat-icon>
         Ver mapa
       </button>
-      <button mat-flat-button color="primary" routerLink="/estates/register">
-        <mat-icon>add</mat-icon>
-        Registrar inmueble
-      </button>
+      @if (isAdmin() || isArrendador()) {
+        <button mat-flat-button color="primary" routerLink="/estates/register">
+          <mat-icon>add</mat-icon>
+          Registrar inmueble
+        </button>
+      }
     </div>
   </header>
 
@@ -33,17 +41,23 @@
             <div><dt>Tipo</dt><dd>{{ element.type }}</dd></div>
             <div><dt>Estado</dt><dd>{{ element.state }}</dd></div>
             <div><dt>ID usuario</dt><dd>{{ element.idUser?.idUser }}</dd></div>
+            @if (isArrendatario()) {
+              <div><dt>Arrendador</dt><dd>{{ element.ownerName }} {{ element.ownerLastName }}</dd></div>
+              <div><dt>Contacto</dt><dd>{{ element.ownerPhoneNumber }}</dd></div>
+            }
           </dl>
         </mat-card-content>
 
-        <mat-card-actions align="end">
-          <button mat-icon-button color="primary" [routerLink]="['/estates/edit', element.idEstate]" aria-label="Editar inmueble">
-            <mat-icon>edit</mat-icon>
-          </button>
-          <button mat-icon-button color="warn" (click)="eliminar(element.idEstate)" aria-label="Eliminar inmueble">
-            <mat-icon>delete</mat-icon>
-          </button>
-        </mat-card-actions>
+        @if (isAdmin() || isArrendador()) {
+          <mat-card-actions align="end">
+            <button mat-icon-button color="primary" [routerLink]="['/estates/edit', element.idEstate]" aria-label="Editar inmueble">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminar(element.idEstate)" aria-label="Eliminar inmueble">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </mat-card-actions>
+        }
       </mat-card>
     } @empty {
       <mat-card class="empty-card">
@@ -53,5 +67,5 @@
     }
   </div>
 
-  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de inmuebles"></mat-paginator>
+  <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de inmuebles"></mat-paginator>
 </section>

@@ -15,6 +15,10 @@ export class Riskreportservice {
     return this.http.get<RiskReport[]>(this.url);
   }
 
+  listMine() {
+    return this.http.get<RiskReport[]>(`${this.url}/my-reports`);
+  }
+
   insert(riskReport: RiskReport) {
     return this.http.post(this.url, riskReport,{ responseType: 'text' });
   }

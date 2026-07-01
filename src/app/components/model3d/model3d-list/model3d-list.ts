@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
 import { Model3d } from '../../../models/Model3d';
 import { FirebaseStorageService } from '../../../services/firebase-storage.service';
+import { LoginService } from '../../../services/login-service';
 import { Model3dservice } from '../../../services/model3dservice';
 
 @Component({
@@ -29,6 +30,7 @@ export class Model3dList implements OnInit, AfterViewInit {
     private mS: Model3dservice,
     private storageService: FirebaseStorageService,
     private snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {}
 
   ngOnInit(): void {}
@@ -39,15 +41,27 @@ export class Model3dList implements OnInit, AfterViewInit {
     this.cargarModelos();
   }
 
-  /** Refresca la fuente de datos usando el servicio CRUD existente. */
+  /** El arrendador consulta sus modelos; los otros roles consultan la lista general. */
   cargarModelos() {
-    this.mS.list().subscribe((data) => {
+    const consulta = this.isArrendador() && !this.isAdmin()
+      ? this.mS.listMine()
+      : this.mS.list();
+
+    consulta.subscribe((data) => {
       this.dataSource.data = data;
       if (this.paginator) {
         this.dataSource.paginator = this.paginator;
         this.paginator.firstPage();
       }
     });
+  }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
+  }
+
+  isArrendador(): boolean {
+    return this.loginService.tieneRol('ARRENDADOR');
   }
 
   /** Elimina primero el GLB remoto y luego su registro relacional. */

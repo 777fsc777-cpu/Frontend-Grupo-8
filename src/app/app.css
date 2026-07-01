@@ -138,6 +138,29 @@
   font-size: 1.2rem;
 }
 
+.topbar > .topbar-actions {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  line-height: 1.1;
+}
+
+.account-copy span {
+  color: #526577;
+  font-size: 0.82rem;
+}
+
+.account-copy strong {
+  color: #18324a;
+  font-size: 0.75rem;
+}
+
 .topbar button {
   min-height: 40px;
   border-radius: 8px;

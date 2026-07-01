@@ -2,7 +2,7 @@
   <header class="list-header">
     <div>
       <p>Reportes</p>
-      <h1>Lista de reportes de riesgo</h1>
+      <h1>{{ isArrendador() && !isAdmin() ? 'Reportes de mis inmuebles' : 'Riesgos' }}</h1>
     </div>
     <button mat-flat-button color="primary" routerLink="/risk-reports/register">
       <mat-icon>add</mat-icon>
@@ -45,5 +45,5 @@
     }
   </div>
 
-  <mat-paginator [pageSize]="5" [pageSizeOptions]="[5]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de reportes"></mat-paginator>
+  <mat-paginator [pageSize]="8" [pageSizeOptions]="[8]" hidePageSize showFirstLastButtons aria-label="Seleccionar pagina de reportes"></mat-paginator>
 </section>

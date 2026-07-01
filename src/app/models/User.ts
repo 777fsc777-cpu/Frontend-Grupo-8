@@ -8,8 +8,8 @@ export class User{
     statusVerification: boolean = false
     profilePhoto: string = ''
     phoneNumber: string = ''
-    createdDate: string = ''
-    updateDate: string = ''
+    createdDate: Date | string = ''
+    updateDate: Date | string = ''
     enabled: boolean = false
     role: string = ''
 }

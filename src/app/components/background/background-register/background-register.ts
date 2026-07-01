@@ -8,26 +8,28 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { Background } from '../../../models/Background';
 import { Backgroundservice } from '../../../services/backgroundservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-background-register',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatDatepickerModule],
   templateUrl: './background-register.html',
   styleUrl: './background-register.css',
 })
 export class BackgroundRegister {
   background: Background = new Background();
+  today: Date = new Date();
 
   constructor(
     private bS: Backgroundservice,
     private router: Router,
     private snackBar: MatSnackBar
   ) {
-    const d = new Date();
-    this.background.registrationDate = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+    this.background.registrationDate = new Date();
   }
 
   aceptar() {
+    this.background.registrationDate = this.formatearFecha(this.background.registrationDate);
     this.bS.insert(this.background).subscribe(() => {
       this.snackBar.open('Antecedente registrado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/backgrounds/list']);
@@ -36,5 +38,15 @@ export class BackgroundRegister {
 
   cancelar() {
     this.router.navigate(['/backgrounds/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

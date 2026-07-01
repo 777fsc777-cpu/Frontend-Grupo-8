@@ -4,7 +4,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { LoginService } from './services/login-service';
 
 @Component({
   selector: 'app-root',
@@ -23,17 +24,47 @@ import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 })
 export class App {
   protected readonly title = signal('SmartRent_Frontend');
+  role: string = '';
+  usuario: string = '';
 
-  readonly navItems = [
-    { label: 'Menu', route: '/', icon: 'dashboard' },
-    { label: 'Usuarios', route: '/users/list', icon: 'group' },
-    { label: 'Roles', route: '/roles/list', icon: 'admin_panel_settings' },
-    { label: 'Antecedentes', route: '/backgrounds/list', icon: 'badge' },
-    { label: 'Inmuebles', route: '/estates/list', icon: 'apartment' },
-    { label: 'Favoritos', route: '/favorites/list', icon: 'favorite' },
-    { label: 'Contratos', route: '/contracts/list', icon: 'description' },
-    { label: 'Resenas', route: '/reviews/list', icon: 'star' },
-    { label: 'Reportes', route: '/risk-reports/list', icon: 'report' },
-    { label: 'Modelos 3D', route: '/models3d/list', icon: 'view_in_ar' },
-  ];
+  constructor(
+    private loginService: LoginService,
+    private router: Router
+  ) {}
+
+  verificar(): boolean {
+    const existe = this.loginService.verificar();
+
+    if (existe) {
+      this.usuario = this.loginService.showUsername() ?? '';
+
+      // En la cabecera se muestra un solo rol, dando prioridad a ADMIN.
+      if (this.isAdmin()) {
+        this.role = 'Administrador';
+      } else if (this.isArrendador()) {
+        this.role = 'Arrendador';
+      } else if (this.isArrendatario()) {
+        this.role = 'Arrendatario';
+      }
+    }
+
+    return existe;
+  }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
+  }
+
+  isArrendador(): boolean {
+    return this.loginService.tieneRol('ARRENDADOR');
+  }
+
+  isArrendatario(): boolean {
+    return this.loginService.tieneRol('ARRENDATARIO');
+  }
+
+  cerrar(): void {
+    this.loginService.cerrar();
+    this.router.navigate(['/login']);
+  }
 }

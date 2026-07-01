@@ -13,7 +13,9 @@ import { Estate } from '../../../models/Estate';
 import { Model3d } from '../../../models/Model3d';
 import { Estateservice } from '../../../services/estateservice';
 import { FirebaseStorageService } from '../../../services/firebase-storage.service';
+import { LoginService } from '../../../services/login-service';
 import { Model3dservice } from '../../../services/model3dservice';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-model3d-update',
@@ -26,6 +28,7 @@ import { Model3dservice } from '../../../services/model3dservice';
     MatIconModule,
     MatProgressSpinnerModule,
     MatSnackBarModule,
+    MatDatepickerModule,
   ],
   templateUrl: './model3d-update.html',
   styleUrl: './model3d-update.css',
@@ -38,6 +41,7 @@ export class Model3dUpdate implements OnInit {
   selectedFileName = 'Conservar archivo actual';
   saving = false;
   originalFileUrl = '';
+  today: Date = new Date();
 
   constructor(
     private mS: Model3dservice,
@@ -46,16 +50,22 @@ export class Model3dUpdate implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {}
 
   /** Recupera el registro, su inmueble y la URL que debe conservarse o reemplazarse. */
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id'));
-    this.eS.list().subscribe((data) => (this.estates = data));
+    if (this.loginService.tieneRol('ARRENDADOR') && !this.loginService.tieneRol('ADMIN')) {
+      this.eS.listMine().subscribe((data) => (this.estates = data));
+    } else {
+      this.eS.list().subscribe((data) => (this.estates = data));
+    }
     this.mS.listId(this.id).subscribe((data) => {
       this.model3d = data;
       this.model3d.idEstate = data.estate?.idEstate ?? data.idEstate;
       this.originalFileUrl = data.fileURL;
+      this.model3d.createDate = new Date(`${data.createDate}T00:00:00`);
     });
   }
 
@@ -92,6 +102,7 @@ export class Model3dUpdate implements OnInit {
         this.model3d.fileURL = uploadedUrl;
       }
 
+      this.model3d.createDate = this.formatearFecha(this.model3d.createDate);
       await firstValueFrom(this.mS.update(this.model3d));
 
       if (uploadedUrl && this.originalFileUrl !== uploadedUrl) {
@@ -133,5 +144,15 @@ export class Model3dUpdate implements OnInit {
   /** Extrae el mensaje del backend cuando existe. */
   private errorText(error: any, fallback: string): string {
     return typeof error?.error === 'string' && error.error.trim() ? error.error : fallback;
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

@@ -8,6 +8,7 @@ import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { Review } from '../../../models/Review';
+import { LoginService } from '../../../services/login-service';
 import { Reviewservice } from '../../../services/reviewservice';
 
 @Component({
@@ -24,7 +25,8 @@ export class ReviewList implements OnInit, AfterViewInit {
 
   constructor(
     private rS: Reviewservice,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loginService: LoginService,
   ) {}
 
   ngOnInit(): void {}
@@ -34,14 +36,27 @@ export class ReviewList implements OnInit, AfterViewInit {
     this.cargarResenias();
   }
 
+  /** El arrendador recibe solo las resenas de sus inmuebles; los otros roles consultan la lista general. */
   cargarResenias() {
-    this.rS.list().subscribe((data) => {
+    const consulta = this.isArrendador() && !this.isAdmin()
+      ? this.rS.listMine()
+      : this.rS.list();
+
+    consulta.subscribe((data) => {
       this.dataSource.data = data;
       if (this.paginator) {
         this.dataSource.paginator = this.paginator;
         this.paginator.firstPage();
       }
     });
+  }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
+  }
+
+  isArrendador(): boolean {
+    return this.loginService.tieneRol('ARRENDADOR');
   }
 
   eliminar(id: number) {

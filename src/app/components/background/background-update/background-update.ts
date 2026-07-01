@@ -9,16 +9,18 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Background } from '../../../models/Background';
 import { Backgroundservice } from '../../../services/backgroundservice';
 import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-background-update',
-  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule],
+  imports: [FormsModule, MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSnackBarModule, MatSelectModule, MatDatepickerModule],
   templateUrl: './background-update.html',
   styleUrl: './background-update.css',
 })
 export class BackgroundUpdate implements OnInit {
   background: Background = new Background();
   id: number = 0;
+  today: Date = new Date();
 
   constructor(
     private bS: Backgroundservice,
@@ -32,10 +34,12 @@ export class BackgroundUpdate implements OnInit {
     this.bS.listId(this.id).subscribe((data) => {
       this.background = data;
       this.background.idUser = data.user?.idUser ?? data.idUser;
+      this.background.registrationDate = new Date(`${data.registrationDate}T00:00:00`);
     });
   }
 
   aceptar() {
+    this.background.registrationDate = this.formatearFecha(this.background.registrationDate);
     this.bS.update(this.id, this.background).subscribe(() => {
       this.snackBar.open('Antecedente actualizado correctamente', 'Cerrar', { duration: 3000 });
       this.router.navigate(['/backgrounds/list']);
@@ -44,5 +48,15 @@ export class BackgroundUpdate implements OnInit {
 
   cancelar() {
     this.router.navigate(['/backgrounds/list']);
+  }
+
+  formatearFecha(fecha: Date | string): string {
+    if (typeof fecha === 'string') {
+      return fecha.includes('T') ? fecha.split('T')[0] : fecha;
+    }
+    const year = fecha.getFullYear();
+    const month = (fecha.getMonth() + 1).toString().padStart(2, '0');
+    const day = fecha.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
   }
 }

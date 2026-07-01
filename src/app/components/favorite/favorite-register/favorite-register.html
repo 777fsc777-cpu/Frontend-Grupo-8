@@ -3,7 +3,11 @@
 <form #favoriteForm="ngForm" (ngSubmit)="save()">
   <mat-form-field appearance="outline">
     <mat-label>Fecha de creacion</mat-label>
-    <input matInput type="date" name="creationDate" [(ngModel)]="favorite.creationDate" required readonly />
+    <input matInput [matDatepicker]="creationPicker" name="creationDate"
+           [(ngModel)]="favorite.creationDate" required [max]="today" />
+    <mat-datepicker-toggle matIconSuffix [for]="creationPicker"></mat-datepicker-toggle>
+    <mat-datepicker #creationPicker></mat-datepicker>
+    <mat-error>Seleccione una fecha que no esté en el futuro.</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -13,6 +17,7 @@
         <mat-option [value]="user.idUser">{{ user.name }} {{ user.lastName }}</mat-option>
       }
     </mat-select>
+    <mat-error>Seleccione un usuario.</mat-error>
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -22,6 +27,7 @@
         <mat-option [value]="estate.idEstate">{{ estate.title }}</mat-option>
       }
     </mat-select>
+    <mat-error>Seleccione un inmueble.</mat-error>
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" [disabled]="favoriteForm.invalid">

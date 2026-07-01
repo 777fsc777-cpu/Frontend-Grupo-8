@@ -15,6 +15,10 @@ export class Estateservice {
     return this.http.get<Estate[]>(`${this.url}/listAll`);
   }
 
+  listMine() {
+    return this.http.get<Estate[]>(`${this.url}/my-estates`);
+  }
+
   insert(estate: Estate) {
     return this.http.post(this.url, estate, { responseType: 'text' });
   }

@@ -10,29 +10,33 @@
         <mat-icon>apartment</mat-icon>
         Inmuebles
       </button>
-      <button mat-stroked-button routerLink="/users/list">
-        <mat-icon>group</mat-icon>
-        Usuarios
-      </button>
+      @if (isAdmin()) {
+        <button mat-stroked-button routerLink="/users/list">
+          <mat-icon>group</mat-icon>
+          Usuarios
+        </button>
+      }
     </div>
   </div>
 
   <div class="summary-grid">
-    <mat-card class="summary-card" routerLink="/favorites/list">
-      <mat-card-header>
-        <mat-icon mat-card-avatar>favorite</mat-icon>
-        <mat-card-title>Favoritos</mat-card-title>
-        <mat-card-subtitle>Inmuebles guardados</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+    @if (isAdmin()) {
+      <mat-card class="summary-card" routerLink="/favorites/list">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>favorite</mat-icon>
+          <mat-card-title>Favoritos</mat-card-title>
+          <mat-card-subtitle>Inmuebles guardados</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
 
-    <mat-card class="summary-card" routerLink="/contracts/list">
-      <mat-card-header>
-        <mat-icon mat-card-avatar>description</mat-icon>
-        <mat-card-title>Contratos</mat-card-title>
-        <mat-card-subtitle>Fechas y estados</mat-card-subtitle>
-      </mat-card-header>
-    </mat-card>
+      <mat-card class="summary-card" routerLink="/contracts/list">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>description</mat-icon>
+          <mat-card-title>Contratos</mat-card-title>
+          <mat-card-subtitle>Fechas y estados</mat-card-subtitle>
+        </mat-card-header>
+      </mat-card>
+    }
 
     <mat-card class="summary-card" routerLink="/risk-reports/list">
       <mat-card-header>

@@ -9,6 +9,7 @@ import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
 import { Estate } from '../../../models/Estate';
 import { Estateservice } from '../../../services/estateservice';
+import { LoginService } from '../../../services/login-service';
 
 @Component({
   selector: 'app-estate-list',
@@ -24,7 +25,8 @@ export class EstateList implements OnInit, AfterViewInit {
 
   constructor(
     private eS: Estateservice,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private loginService: LoginService
   ) {}
 
   ngOnInit(): void {}
@@ -35,13 +37,31 @@ export class EstateList implements OnInit, AfterViewInit {
   }
 
   cargarInmuebles() {
-    this.eS.list().subscribe((data) => {
-      this.dataSource.data = data;
-      if (this.paginator) {
+    if (this.isArrendador() && !this.isAdmin()) {
+      this.eS.listMine().subscribe((data) => {
+        this.dataSource.data = data;
         this.dataSource.paginator = this.paginator;
         this.paginator.firstPage();
-      }
-    });
+      });
+    } else {
+      this.eS.list().subscribe((data) => {
+        this.dataSource.data = data;
+        this.dataSource.paginator = this.paginator;
+        this.paginator.firstPage();
+      });
+    }
+  }
+
+  isAdmin(): boolean {
+    return this.loginService.tieneRol('ADMIN');
+  }
+
+  isArrendador(): boolean {
+    return this.loginService.tieneRol('ARRENDADOR');
+  }
+
+  isArrendatario(): boolean {
+    return this.loginService.tieneRol('ARRENDATARIO');
   }
 
   eliminar(id: number) {

@@ -1,0 +1,30 @@
+<section class="login-page">
+  <div class="login-panel">
+    <div class="login-brand">
+      <mat-icon>home_work</mat-icon>
+      <div>
+        <span>SmartRent</span>
+        <h1>Iniciar sesion</h1>
+      </div>
+    </div>
+
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <mat-form-field appearance="outline">
+        <mat-label>Usuario</mat-label>
+        <input matInput name="username" [(ngModel)]="username" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Contraseña</mat-label>
+        <input matInput type="password" name="password" [(ngModel)]="password" required />
+      </mat-form-field>
+
+      <button mat-flat-button color="primary" type="submit" [disabled]="loginForm.invalid">
+        <mat-icon>login</mat-icon>
+        Ingresar
+      </button>
+
+      <a mat-button routerLink="/register">Crear una cuenta</a>
+    </form>
+  </div>
+</section>
