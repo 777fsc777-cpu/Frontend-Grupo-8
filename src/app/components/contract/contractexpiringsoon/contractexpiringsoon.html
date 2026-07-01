@@ -1,0 +1,32 @@
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Contratos</p>
+      <h1>Contratos por vencer</h1>
+    </div>
+  </header>
+
+  <div class="entity-grid">
+    @for (element of contratos; track element.estateTitle + element.endDate) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>event_busy</mat-icon>
+          <mat-card-title>{{ element.estateTitle }}</mat-card-title>
+          <mat-card-subtitle>{{ element.name }} {{ element.lastName }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <dl>
+            <div><dt>Fecha fin</dt><dd>{{ element.endDate | date:'dd/MM/yyyy HH:mm' }}</dd></div>
+            <div><dt>Dias restantes</dt><dd>{{ element.daysRemaining }}</dd></div>
+          </dl>
+        </mat-card-content>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay contratos por vencer.</span>
+      </mat-card>
+    }
+  </div>
+</section>
