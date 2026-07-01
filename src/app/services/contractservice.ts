@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Contract } from '../models/Contract';
 import { ContractExpiringDTO } from '../models/contract-expiring-dto';
+import { ContractRevenueDistrictDTO } from '../models/contract-revenue-district-dto';
+import { ContractAverageDurationDTO } from '../models/contract-average-duration-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +36,11 @@ export class Contractservice {
   expiringSoon() {
     return this.http.get<ContractExpiringDTO[]>(`${this.url}/expiring-soon`);
   }
+  revenueByDistrict() {
+    return this.http.get<ContractRevenueDistrictDTO[]>(`${this.url}/revenue-by-district`);
+  }
 
+  averageDurationByLessor() {
+    return this.http.get<ContractAverageDurationDTO[]>(`${this.url}/average-duration-lessor`);
+  }
 }
