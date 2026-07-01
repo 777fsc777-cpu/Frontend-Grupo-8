@@ -11,7 +11,7 @@ import { Contractservice } from '../../../services/contractservice';
   templateUrl: './contractexpiringsoon.html',
   styleUrl: './contractexpiringsoon.css',
 })
-export class Contractexpiringsoon {
+export class Contractexpiringsoon implements OnInit{
   contratos: ContractExpiringDTO[] = [];
  
   constructor(private cS: Contractservice) {}
