@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Review } from '../models/Review';
-import { ReviewsBelowAverageDTO } from '../models/reviews-below-average-dto';
-import { ReviewsReviewsLessorRatingDTO } from '../models/reviews-reviews-lessor-rating-dto';
-import { ReviewsReviewsNoReviewEstateDTO } from '../models/reviews-reviews-no-review-estate-dto';
-import { ReviewsReviewsRatingDistributionDTO } from '../models/reviews-reviews-rating-distribution-dto';
+import { ReviewsBelowAverageDTO } from '../models/reports/review/reviews-below-average-dto';
+import { ReviewsReviewsLessorRatingDTO } from '../models/reports/review/reviews-reviews-lessor-rating-dto';
+import { ReviewsReviewsNoReviewEstateDTO } from '../models/reports/review/reviews-reviews-no-review-estate-dto';
+import { ReviewsReviewsRatingDistributionDTO } from '../models/reports/review/reviews-reviews-rating-distribution-dto';
 
 @Injectable({
   providedIn: 'root',
