@@ -38,6 +38,28 @@
           </mat-optgroup>
         }
 
+        @if (isAdmin() || isArrendatario()) {
+          <mat-optgroup label="Inmuebles">
+            <mat-option value="estate-owners">
+              Propietarios con inmuebles amplios
+            </mat-option>
+            <mat-option value="estate-district">
+              Inmuebles por distrito
+            </mat-option>
+            <mat-option value="estate-above-average">
+              Alquileres sobre el promedio
+            </mat-option>
+            <mat-option value="estate-price-per-room">
+              Mejor precio por habitación
+            </mat-option>
+            @if (isAdmin()) {
+              <mat-option value="estate-price-range">
+                Distribución por rango de precio
+              </mat-option>
+            }
+          </mat-optgroup>
+        }
+
         <mat-optgroup label="Reseñas">
           <mat-option value="review-below-average">
             Inmuebles bajo el promedio
@@ -89,6 +111,31 @@
       @case ('contract-average') {
         @if (isAdmin()) {
           <app-contract-average-duration-by-lessor></app-contract-average-duration-by-lessor>
+        }
+      }
+      @case ('estate-owners') {
+        @if (isAdmin() || isArrendatario()) {
+          <app-owners-estates-report></app-owners-estates-report>
+        }
+      }
+      @case ('estate-district') {
+        @if (isAdmin() || isArrendatario()) {
+          <app-district-estates-report></app-district-estates-report>
+        }
+      }
+      @case ('estate-above-average') {
+        @if (isAdmin() || isArrendatario()) {
+          <app-above-average-rents-report></app-above-average-rents-report>
+        }
+      }
+      @case ('estate-price-per-room') {
+        @if (isAdmin() || isArrendatario()) {
+          <app-price-per-room-report></app-price-per-room-report>
+        }
+      }
+      @case ('estate-price-range') {
+        @if (isAdmin()) {
+          <app-price-range-report></app-price-range-report>
         }
       }
       @case ('review-below-average') {
