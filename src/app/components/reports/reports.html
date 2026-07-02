@@ -1,0 +1,47 @@
+<section class="reports-page">
+  <header class="reports-header">
+    <div>
+      <p>Consultas del sistema</p>
+      <h1>Reportes</h1>
+    </div>
+    <mat-icon>analytics</mat-icon>
+  </header>
+
+  <div class="report-selector">
+    <mat-form-field appearance="outline">
+      <mat-label>Seleccionar reporte</mat-label>
+      <mat-select
+        [value]="selectedReport"
+        (selectionChange)="selectedReport = $event.value">
+        <mat-option value="type-frequency">
+          Frecuencia por tipo de antecedente
+        </mat-option>
+        <mat-option value="high-risk">
+          Usuarios con mayor cantidad de antecedentes
+        </mat-option>
+
+        @if (isAdmin()) {
+          <mat-option value="unverified">
+            Usuarios no verificados con antecedentes
+          </mat-option>
+        }
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="report-content">
+    @switch (selectedReport) {
+      @case ('high-risk') {
+        <app-high-risk-report></app-high-risk-report>
+      }
+      @case ('unverified') {
+        @if (isAdmin()) {
+          <app-unverified-report></app-unverified-report>
+        }
+      }
+      @default {
+        <app-type-frequency-report></app-type-frequency-report>
+      }
+    }
+  </div>
+</section>
