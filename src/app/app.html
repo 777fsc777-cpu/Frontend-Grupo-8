@@ -17,6 +17,13 @@
           <span matListItemTitle>Menu</span>
         </a>
 
+        @if (isAdmin() || isArrendador() || isArrendatario()) {
+          <a mat-list-item routerLink="/reports" routerLinkActive="active-link">
+            <mat-icon matListItemIcon>bar_chart</mat-icon>
+            <span matListItemTitle>Reportes</span>
+          </a>
+        }
+
         @if (isAdmin()) {
           <a mat-list-item routerLink="/users/list" routerLinkActive="active-link">
             <mat-icon matListItemIcon>group</mat-icon>
