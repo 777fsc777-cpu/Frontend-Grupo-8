@@ -56,6 +56,11 @@ export const routes: Routes = [
     component: UserRegister,
   },
   {
+    path: 'reports',
+    component: Reportes,
+    canActivate: [seguridadGuard],
+  },
+  {
     path: 'users',
     component: User,
     children: [
