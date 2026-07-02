@@ -41,6 +41,10 @@ import { Model3dView } from './components/model3d/model3d-view/model3d-view';
 import { Contractexpiringsoon } from './components/contract/contractexpiringsoon/contractexpiringsoon';
 import { ContractRevenueByDistrict } from './components/contract/contract-revenue-by-district/contract-revenue-by-district';
 import { ContractAverageDurationByLessor } from './components/contract/contract-average-duration-lessor/contract-average-duration-lessor';
+import { ReviewsBelowAverage } from './components/review/reviews-below-average/reviews-below-average';
+import { ReviewNoReviewEstate } from './components/review/review-no-review-estate/review-no-review-estate';
+import { ReviewRatingDistribution } from './components/review/review-rating-distribution/review-rating-distribution';
+import { ReviewLessorRating } from './components/review/review-lessor-rating/review-lessor-rating';
 
 export const routes: Routes = [
   {
@@ -118,6 +122,10 @@ export const routes: Routes = [
       { path: 'list', component: ReviewList },
       { path: 'register', component: ReviewRegister },
       { path: 'edit/:id', component: ReviewUpdate },
+      { path: 'review-below-average', component: ReviewsBelowAverage },
+      { path: 'review-lessors-rating', component: ReviewLessorRating },
+      { path: 'review-no-reviews', component: ReviewNoReviewEstate },
+      { path: 'review-rating-distribution', component: ReviewRatingDistribution },
     ],
   },
   {
