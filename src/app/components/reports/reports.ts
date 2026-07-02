@@ -6,6 +6,11 @@ import { LoginService } from '../../services/login-service';
 import { ContractAverageDurationByLessor } from './contract/contract-average-duration-lessor/contract-average-duration-lessor';
 import { ContractRevenueByDistrict } from './contract/contract-revenue-by-district/contract-revenue-by-district';
 import { Contractexpiringsoon } from './contract/contractexpiringsoon/contractexpiringsoon';
+import { AboveAverageRentsReport } from './estate/above-average-rents-report/above-average-rents-report';
+import { DistrictEstatesReport } from './estate/district-estates-report/district-estates-report';
+import { OwnersEstatesReport } from './estate/owners-estates-report/owners-estates-report';
+import { PricePerRoomReport } from './estate/price-per-room-report/price-per-room-report';
+import { PriceRangeReport } from './estate/price-range-report/price-range-report';
 import { ReviewLessorRating } from './review/review-lessor-rating/review-lessor-rating';
 import { ReviewNoReviewEstate } from './review/review-no-review-estate/review-no-review-estate';
 import { ReviewRatingDistribution } from './review/review-rating-distribution/review-rating-distribution';
@@ -26,6 +31,11 @@ import { UnverifiedReport } from './user/unverified-report/unverified-report';
     Contractexpiringsoon,
     ContractRevenueByDistrict,
     ContractAverageDurationByLessor,
+    OwnersEstatesReport,
+    DistrictEstatesReport,
+    AboveAverageRentsReport,
+    PricePerRoomReport,
+    PriceRangeReport,
     ReviewsBelowAverage,
     ReviewLessorRating,
     ReviewNoReviewEstate,
