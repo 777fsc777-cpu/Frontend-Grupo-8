@@ -6,25 +6,33 @@
     </div>
   </header>
 
-  <div class="entity-grid">
-    @for (element of distritos; track element.district) {
-      <mat-card class="entity-card">
+  @if (distritos.length > 0) {
+    <div class="charts-row">
+      <mat-card class="chart-card">
         <mat-card-header>
-          <mat-icon mat-card-avatar>location_city</mat-icon>
-          <mat-card-title>{{ element.district }}</mat-card-title>
+          <mat-icon mat-card-avatar>bar_chart</mat-icon>
+          <mat-card-title>Ingreso total por distrito</mat-card-title>
         </mat-card-header>
-
         <mat-card-content>
-          <dl>
-            <div><dt>Ingreso total</dt><dd>{{ element.totalRevenue | currency }}</dd></div>
-          </dl>
+          <div class="chart-container">
+            <canvas baseChart [data]="barChartData" [options]="barChartOptions" type="bar"></canvas>
+          </div>
         </mat-card-content>
       </mat-card>
-    } @empty {
-      <mat-card class="empty-card">
-        <mat-icon>inbox</mat-icon>
-        <span>No hay datos de ingresos por distrito.</span>
+
+      <mat-card class="chart-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>pie_chart</mat-icon>
+          <mat-card-title>Participacion sobre el total</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="chart-container">
+            <canvas baseChart [data]="doughnutChartData" [options]="doughnutChartOptions" type="doughnut"></canvas>
+          </div>
+        </mat-card-content>
       </mat-card>
-    }
-  </div>
+    </div>
+  }
+
+  
 </section>
