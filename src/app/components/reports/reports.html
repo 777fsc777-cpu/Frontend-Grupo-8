@@ -13,17 +13,54 @@
       <mat-select
         [value]="selectedReport"
         (selectionChange)="selectedReport = $event.value">
-        <mat-option value="type-frequency">
-          Frecuencia por tipo de antecedente
-        </mat-option>
-        <mat-option value="high-risk">
-          Usuarios con mayor cantidad de antecedentes
-        </mat-option>
+        <mat-optgroup label="Antecedentes">
+          <mat-option value="type-frequency">
+            Frecuencia por tipo de antecedente
+          </mat-option>
+          <mat-option value="high-risk">
+            Usuarios con mayor cantidad de antecedentes
+          </mat-option>
+        </mat-optgroup>
+
+        @if (isAdmin() || isArrendatario()) {
+          <mat-optgroup label="Contratos">
+            <mat-option value="contract-expiring">
+              Contratos por vencer
+            </mat-option>
+            @if (isAdmin()) {
+              <mat-option value="contract-revenue">Ingresos por distrito</mat-option>
+            }
+            @if (isAdmin()) {
+              <mat-option value="contract-average">
+                Duración promedio por arrendador
+              </mat-option>
+            }
+          </mat-optgroup>
+        }
+
+        <mat-optgroup label="Reseñas">
+          <mat-option value="review-below-average">
+            Inmuebles bajo el promedio
+          </mat-option>
+          <mat-option value="review-lessors">
+            Mejores arrendadores
+          </mat-option>
+          @if (isAdmin()) {
+            <mat-option value="review-no-reviews">Inmuebles sin reseñas</mat-option>
+          }
+          @if (isAdmin()) {
+            <mat-option value="review-rating-distribution">
+              Distribución de calificaciones
+            </mat-option>
+          }
+        </mat-optgroup>
 
         @if (isAdmin()) {
-          <mat-option value="unverified">
-            Usuarios no verificados con antecedentes
-          </mat-option>
+          <mat-optgroup label="Usuarios">
+            <mat-option value="unverified">
+              Usuarios no verificados con antecedentes
+            </mat-option>
+          </mat-optgroup>
         }
       </mat-select>
     </mat-form-field>
@@ -37,6 +74,37 @@
       @case ('unverified') {
         @if (isAdmin()) {
           <app-unverified-report></app-unverified-report>
+        }
+      }
+      @case ('contract-expiring') {
+        @if (isAdmin() || isArrendatario()) {
+          <app-contractexpiringsoon></app-contractexpiringsoon>
+        }
+      }
+      @case ('contract-revenue') {
+        @if (isAdmin()) {
+          <app-contract-revenue-by-district></app-contract-revenue-by-district>
+        }
+      }
+      @case ('contract-average') {
+        @if (isAdmin()) {
+          <app-contract-average-duration-by-lessor></app-contract-average-duration-by-lessor>
+        }
+      }
+      @case ('review-below-average') {
+        <app-reviews-below-average></app-reviews-below-average>
+      }
+      @case ('review-lessors') {
+        <app-review-lessor-rating></app-review-lessor-rating>
+      }
+      @case ('review-no-reviews') {
+        @if (isAdmin()) {
+          <app-review-no-review-estate></app-review-no-review-estate>
+        }
+      }
+      @case ('review-rating-distribution') {
+        @if (isAdmin()) {
+          <app-review-rating-distribution></app-review-rating-distribution>
         }
       }
       @default {
