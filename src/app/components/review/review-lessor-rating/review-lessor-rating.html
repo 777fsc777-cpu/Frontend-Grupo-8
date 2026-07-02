@@ -1,0 +1,31 @@
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Resenas</p>
+      <h1>Mejores arrendadores</h1>
+    </div>
+  </header>
+
+  <div class="entity-grid">
+    @for (element of arrendadores; track element.name + element.lastName) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>military_tech</mat-icon>
+          <mat-card-title>{{ element.name }} {{ element.lastName }}</mat-card-title>
+        </mat-card-header>
+
+        <mat-card-content>
+          <dl>
+            <div><dt>Calificacion promedio</dt><dd>{{ element.average | number:'1.0-1' }}</dd></div>
+            <div><dt>Total de resenas</dt><dd>{{ element.totalReviews }}</dd></div>
+          </dl>
+        </mat-card-content>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay datos de arrendadores.</span>
+      </mat-card>
+    }
+  </div>
+</section>

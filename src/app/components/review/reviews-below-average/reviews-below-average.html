@@ -1,0 +1,31 @@
+<section class="card-list-page">
+  <header class="list-header">
+    <div>
+      <p>Resenas</p>
+      <h1>Inmuebles bajo el promedio</h1>
+    </div>
+  </header>
+
+  <div class="entity-grid">
+    @for (element of inmuebles; track element.title + element.city) {
+      <mat-card class="entity-card">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>trending_down</mat-icon>
+          <mat-card-title>{{ element.title }}</mat-card-title>
+          <mat-card-subtitle>{{ element.city }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+          <dl>
+            <div><dt>Calificacion promedio</dt><dd>{{ element.average | number:'1.0-1' }}</dd></div>
+          </dl>
+        </mat-card-content>
+      </mat-card>
+    } @empty {
+      <mat-card class="empty-card">
+        <mat-icon>inbox</mat-icon>
+        <span>No hay inmuebles bajo el promedio.</span>
+      </mat-card>
+    }
+  </div>
+</section>
